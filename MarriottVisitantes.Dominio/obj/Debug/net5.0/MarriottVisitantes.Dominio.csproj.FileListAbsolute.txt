@@ -1,0 +1,12 @@
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.csproj.AssemblyReference.cache
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.AssemblyInfoInputs.cache
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.AssemblyInfo.cs
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.csproj.CoreCompileInputs.cache
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\bin\Debug\net5.0\MarriottVisitantes.Dominio.deps.json
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\bin\Debug\net5.0\MarriottVisitantes.Dominio.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\bin\Debug\net5.0\ref\MarriottVisitantes.Dominio.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\bin\Debug\net5.0\MarriottVisitantes.Dominio.pdb
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\ref\MarriottVisitantes.Dominio.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Dominio\obj\Debug\net5.0\MarriottVisitantes.Dominio.pdb
