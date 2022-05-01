@@ -4,14 +4,14 @@
     "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj": {}
   },
   "projects": {
-    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj": {
+    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj",
-        "projectName": "MarriottVisitantes.Web",
-        "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj",
+        "projectUniqueName": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
+        "projectName": "MarriottVisitantes.Dominio",
+        "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
         "packagesPath": "C:\\Users\\danielchacon\\.nuget\\packages\\",
-        "outputPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\obj\\",
+        "outputPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danielchacon\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,161 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\MarriottVisitantes.Repositorio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\MarriottVisitantes.Repositorio.csproj",
+        "projectName": "MarriottVisitantes.Repositorio",
+        "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\MarriottVisitantes.Repositorio.csproj",
+        "packagesPath": "C:\\Users\\danielchacon\\.nuget\\packages\\",
+        "outputPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\danielchacon\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {
+                "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.16, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj",
+        "projectName": "MarriottVisitantes.Web",
+        "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj",
+        "packagesPath": "C:\\Users\\danielchacon\\.nuget\\packages\\",
+        "outputPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\danielchacon\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {
+                "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj"
+              },
+              "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\MarriottVisitantes.Repositorio.csproj": {
+                "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Repositorio\\MarriottVisitantes.Repositorio.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MarriottVisitantes.Repositorio;
+using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Repositorio.Claims;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace MarriottVisitantes.Web
 {
@@ -24,6 +29,19 @@ namespace MarriottVisitantes.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<MarriottVisitantesDbContext>(options => {
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
+            services.AddIdentity<Usuario, IdentityRole<int>>(options => 
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+            })
+                .AddUserStore<ApplicationUserStore>()
+                .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddScoped<IUserClaimsPrincipalFactory<Usuario>,MarriottUserClaimsPrincipalFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

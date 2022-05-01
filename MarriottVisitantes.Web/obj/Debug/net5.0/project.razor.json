@@ -15644,6 +15644,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Home\\Login.cshtml",
+      "TargetPath": "Views\\Home\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

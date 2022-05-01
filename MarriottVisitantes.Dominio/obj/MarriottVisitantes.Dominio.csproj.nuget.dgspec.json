@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "\\\\Mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {}
+    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {}
   },
   "projects": {
-    "\\\\Mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {
+    "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\Mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
+        "projectUniqueName": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
         "projectName": "MarriottVisitantes.Dominio",
-        "projectPath": "\\\\Mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
+        "projectPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\MarriottVisitantes.Dominio.csproj",
         "packagesPath": "C:\\Users\\danielchacon\\.nuget\\packages\\",
-        "outputPath": "\\\\Mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\obj\\",
+        "outputPath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danielchacon\\AppData\\Roaming\\NuGet\\NuGet.Config"
