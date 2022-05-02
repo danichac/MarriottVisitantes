@@ -13,6 +13,10 @@ using MarriottVisitantes.Repositorio.Identidad;
 using MarriottVisitantes.Repositorio.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using MarriottVisitantes.Repositorio.Interfaces;
+using MarriottVisitantes.Repositorio.Implementaciones;
+using MarriottVisitantes.Servicios.Interfaces;
+using MarriottVisitantes.Servicios.Implementaciones;
 
 namespace MarriottVisitantes.Web
 {
@@ -42,6 +46,8 @@ namespace MarriottVisitantes.Web
                 .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped<IUserClaimsPrincipalFactory<Usuario>,MarriottUserClaimsPrincipalFactory>();
+            services.AddScoped<IRepositorioUsuario, RepositorioUsuarios>();
+            services.AddScoped<IServicioUsuarios, ServicioUsuarios>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

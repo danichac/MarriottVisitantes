@@ -99,4 +99,8 @@
 \\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\MarriottVisitantes.Repositorio.dll
 \\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\MarriottVisitantes.Dominio.pdb
 \\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\MarriottVisitantes.Repositorio.pdb
-\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\Humanizer.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\MarriottVisitantes.Servicios.dll
+\\mac\Home\Desktop\Proyecto de graduación\ProyectoHotelMarriott\MarriottVisitantes.Web\bin\Debug\net5.0\MarriottVisitantes.Servicios.pdb

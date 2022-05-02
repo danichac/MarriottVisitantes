@@ -147,7 +147,7 @@
                                 </li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
-                                    <a class="dropdown-item" asp-controller="Login" asp-action="Login">
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout" method="post">
                                         <i class="material-icons leading-icon">logout</i>
                                         <div class="me-3">Logout</div>
                                     </a>
@@ -396,15 +396,18 @@
                         </div>
                     </div>
                     <!-- Drawer footer        -->
-                    <div class="drawer-footer border-top">
-                        <div class="d-flex align-items-center">
-                            <i class="material-icons text-muted">account_circle</i>
-                            <div class="ms-3">
-                                <div class="caption">Logged in as:</div>
-                                <div class="small fw-500">Start Bootstrap</div>
+                    @if(User.Identity.IsAuthenticated) 
+                    {
+                        <div class="drawer-footer border-top">
+                            <div class="d-flex align-items-center">
+                                <i class="material-icons text-muted">account_circle</i>
+                                <div class="ms-3">
+                                    <div class="caption">Ingreso como:</div>
+                                    <div class="small fw-500">@User.Identity.Name</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }        
                 </nav>
             </div>
             <!-- Layout content-->

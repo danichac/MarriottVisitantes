@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using MarriottVisitantes.Repositorio.Identidad;
 using Microsoft.AspNetCore.Identity;
 
-namespace MarriottVisitantes.Repositorio.Interfaces
+namespace MarriottVisitantes.Servicios.Interfaces
 {
-    public interface IRepositorioUsuario
+    public interface IServicioUsuarios
     {
         public Task<bool> IngresarAsync(string email, string password, bool recordarme);
 

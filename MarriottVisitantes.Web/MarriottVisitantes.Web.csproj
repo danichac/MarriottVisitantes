@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MarriottVisitantes.Dominio\MarriottVisitantes.Dominio.csproj" />
     <ProjectReference Include="..\MarriottVisitantes.Repositorio\MarriottVisitantes.Repositorio.csproj" />
+    <ProjectReference Include="..\MarriottVisitantes.Servicios\MarriottVisitantes.Servicios.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

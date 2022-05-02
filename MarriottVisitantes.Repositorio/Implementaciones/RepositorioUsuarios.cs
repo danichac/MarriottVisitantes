@@ -71,14 +71,14 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             return new Usuario(usuarioApp.Id, usuarioApp.UserName, usuarioApp.Email);
         }
 
-        public async Task<bool> IngresarAsync(string email, string password)
+        public async Task<bool> IngresarAsync(string email, string password, bool recordarme)
         {
             var usuario = await BuscarPorEmailAsync(email);
             if(usuario is null){
                 return false;
             }
 
-            var resultado = await _signInManager.PasswordSignInAsync(usuario, password, false, false);
+            var resultado = await _signInManager.PasswordSignInAsync(usuario, password, recordarme, false);
 
             return resultado.Succeeded;
         }

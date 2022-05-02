@@ -1,6 +1,9 @@
+@model LoginViewModel
 @{
     ViewData["Title"] = "Marriott Costa Rica";
     Layout = null;
+    var returnURL = @Context.Request.Query["returnurl"]; 
+    
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +24,7 @@
         <!-- Load main stylesheet-->
         <link href="~/css/styles.css" rel="stylesheet" />
     </head>
-    <body class="bg-pattern-waihou">
+    <body style="background-color: #001f3f;">
         <!-- Layout wrapper-->
         <div id="layoutAuthentication">
             <!-- Layout content-->
@@ -32,30 +35,39 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-xxl-10 col-xl-10 col-lg-12">
-                                <div class="card card-raised shadow-10 mt-5 mt-xl-10 mb-4">
+                                <div class="card card-raised shadow-10 mt-5 mt-xl-10 mb-4" style="margin: auto;">
                                     <div class="row g-0">
                                         <div class="col-lg-5 col-md-6">
                                             <div class="card-body p-5">
                                                 <!-- Auth header with logo image-->
                                                 <div class="text-center">
-                                                    <img class="mb-3" src="assets/img/icons/background.svg" alt="..." style="height: 48px" />
+                                                    <embed class="mb-3" src="assets/MarriottLogo.svg" alt="..." style="height: 48px" />
                                                     <h1 class="display-5 mb-0">Inicio de sesión</h1>
                                                     <div class="subheading-1 mb-5"></div>
                                                 </div>
                                                 <!-- Login submission form-->
-                                                <form class="mb-5">
-                                                    <div class="mb-4"><mwc-textfield class="w-100" label="Nombre de usuario" outlined></mwc-textfield></div>
-                                                    <div class="mb-4"><mwc-textfield class="w-100" label="Contraseña" outlined icontrailing="visibility_off" type="password"></mwc-textfield></div>
-                                                    <div class="d-flex align-items-center">
-                                                        <mwc-formfield label="Recordar contraseña"><mwc-checkbox></mwc-checkbox></mwc-formfield>
+                                                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@returnURL" class="mb-5" >
+                                                    <div class="form-floating input-group-lg mb-3">
+                                                        <input id="Email" asp-for="Email" type="text" class="form-control" placeholder="nombre@ejemplo.com">
+                                                        <label for="Email" asp-for="Email" class="form-label">Correo electrónico</label>      
+                                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-floating input-group-lg mb-3">
+                                                        <input id="Password" asp-for="Password" type="password" class="form-control" placeholder="Contraseña">
+                                                        <label for="Password" asp-for="Password" class="form-label">Contraseña</label>
+                                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="checkbox" asp-for="RememberMe">
+                                                        <label class="form-check-label" asp-for="RememberMe">
+                                                            Recuérdame
+                                                        </label>
                                                     </div>
                                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                        <a class="small fw-500 text-decoration-none" href="app-auth-password-basic.html">Olvidé mi contraseña</a>
-                                                        <a class="btn btn-primary" href="index.html">Ingresar</a>
+                                                        <button type="submit" class="btn btn-primary">Ingresar</button>
                                                     </div>
                                                 </form>
                                                 <!-- Auth card message-->
-                                                <div class="text-center"><a class="small fw-500 text-decoration-none" href="app-auth-register-basic.html">New User? Create an account!</a></div>
                                             </div>
                                         </div>
                                         <!-- Background image column using inline CSS-->
@@ -70,10 +82,14 @@
             <!-- Layout footer-->
             <div id="layoutAuthentication_footer"></div>
         </div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- Load Bootstrap JS bundle-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <!-- Load global scripts-->
         <script type="module" src="~/js/material.js"></script>
         <script src="~/js/scripts.js"></script>
+        @section Scripts {  
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
+        }  
     </body>
 </html>

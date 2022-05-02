@@ -15624,11 +15624,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Login\\Login.cshtml",
-      "TargetPath": "Views\\Login\\Login.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -15641,11 +15636,6 @@
     {
       "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Home\\Login.cshtml",
-      "TargetPath": "Views\\Home\\Login.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15666,6 +15656,11 @@
     {
       "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Shared\\_NewLayout.cshtml",
       "TargetPath": "Views\\Shared\\_NewLayout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Account\\Login.cshtml",
+      "TargetPath": "Views\\Account\\Login.cshtml",
       "FileKind": "mvc"
     }
   ],

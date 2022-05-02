@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IhR1yRdZR6uWWSlxmhufc7+d/s97ww4KqDpGr6CVMM3w/BxSHgwizwC4C3StStnURKQFKMnXBbYvHZ1jpbCv+Q==",
+  "dgSpecHash": "HwJIhGNKmGlpD7S/MyPUpPNvhevbYoh846QJRXP3t3AZ6wZi6f9us/EWM97iBIXnB+Ce7lCZp0mI1frZX0oV8A==",
   "success": true,
   "projectFilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\MarriottVisitantes.Web.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\danielchacon\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
@@ -21,7 +22,7 @@
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.2.0\\microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.16\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
-    "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.16\\microsoft.data.sqlite.core.5.0.16.nupkg.sha512",
@@ -29,6 +30,7 @@
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.16\\microsoft.entityframeworkcore.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.16\\microsoft.entityframeworkcore.abstractions.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.16\\microsoft.entityframeworkcore.analyzers.5.0.16.nupkg.sha512",
+    "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.16\\microsoft.entityframeworkcore.design.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.16\\microsoft.entityframeworkcore.relational.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\5.0.16\\microsoft.entityframeworkcore.sqlite.5.0.16.nupkg.sha512",
     "C:\\Users\\danielchacon\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\5.0.16\\microsoft.entityframeworkcore.sqlite.core.5.0.16.nupkg.sha512",
