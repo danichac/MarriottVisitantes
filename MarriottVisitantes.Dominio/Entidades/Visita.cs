@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using MarriottVisitantes.Dominio.Utils;
 
 namespace MarriottVisitantes.Dominio.Entidades
 {
@@ -20,6 +19,8 @@ namespace MarriottVisitantes.Dominio.Entidades
         public Visitante Visitante { get; set; }
 
         [Required]
+        public GafeteId ColorGafeteId { get; set; }
+
         public ColorGafete ColorGafete { get; set; }
 
         public int NumeroGafete { get; set; }

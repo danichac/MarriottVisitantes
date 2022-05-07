@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -16,10 +17,29 @@ namespace MarriottVisitantes.Repositorio
 
         public DbSet<Visitante> Visitantes {get; set;}
         public DbSet<Visita> Visitas { get; set; }
+        public DbSet<ColorGafete> ColorGafete {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<Visita>()
+                .Property(v => v.ColorGafeteId);
+            modelBuilder
+                .Entity<ColorGafete>()
+                .Property(cg => cg.Id);
+            modelBuilder
+                .Entity<ColorGafete>()
+                .HasData(
+                    Enum.GetValues(typeof(GafeteId))
+                        .Cast<GafeteId>()
+                        .Select(g => new ColorGafete()
+                            {
+                                Id = g,
+                                Color = g.ObtenerDescripcion()
+                            })
+                );
 
             var daniel = new Usuario
             {
