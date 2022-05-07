@@ -23,7 +23,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
 
         public async Task AddToRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
-            var roleId = await context.Roles.Where(r => r.Name == roleName)
+            var roleId = await context.Roles.Where(r => r.Name.ToUpper() == roleName.ToUpper())
                 .Select(r => r.Id).FirstOrDefaultAsync();
             var userRole = new IdentityUserRole<int>();
             userRole.RoleId = roleId;
@@ -108,7 +108,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
 
         public async Task<IList<Usuario>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
-            var roleId = await context.Roles.Where(r => r.Name == roleName)
+            var roleId = await context.Roles.Where(r => r.Name.ToUpper() == roleName.ToUpper())
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync();
 
@@ -128,7 +128,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
 
         public async Task<bool> IsInRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
-            var roleId = await context.Roles.Where(r => r.Name == roleName)
+            var roleId = await context.Roles.Where(r => r.Name.ToUpper() == roleName.ToUpper())
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync();
 

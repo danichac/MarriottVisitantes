@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarriottVisitantes.Repositorio.Migrations
 {
     [DbContext(typeof(MarriottVisitantesDbContext))]
-    [Migration("20220502015340_FirstMigration")]
+    [Migration("20220507171640_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,6 +95,49 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.ToTable("Visitantes");
                 });
 
+            modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.Rol", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "25c979da-08ea-4945-b626-bb830246aad1",
+                            Name = "Administrador",
+                            NormalizedName = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "36e14df8-24bb-4488-b293-2da3b7028776",
+                            Name = "Usuario",
+                            NormalizedName = "USUARIO"
+                        });
+                });
+
             modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -171,40 +214,13 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ2pyvmEZTUkrbR+Bs2uWL+5lP5mJZQmhmSLfC64D2Kxk+bAoNP3PDYltNTHMuh3sw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGx9HlqOUbBWwwmdAbafglbMEj2weso/0pppBuQ5Bc1F9aTHpFIK5o9NUNc51rh7bQ==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",
                             SegundoNombre = "",
                             UserName = "danichac"
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -280,11 +296,15 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -306,6 +326,22 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.UsuarioRol", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasDiscriminator().HasValue("UsuarioRol");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
+                });
+
             modelBuilder.Entity("MarriottVisitantes.Dominio.Entidades.Visita", b =>
                 {
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.Visitante", "Visitante")
@@ -317,7 +353,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("MarriottVisitantes.Repositorio.Identidad.Rol", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -342,21 +378,6 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MarriottVisitantes.Repositorio.Identidad.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("MarriottVisitantes.Repositorio.Identidad.Usuario", null)
@@ -366,9 +387,38 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.UsuarioRol", b =>
+                {
+                    b.HasOne("MarriottVisitantes.Repositorio.Identidad.Rol", "Rol")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MarriottVisitantes.Repositorio.Identidad.Usuario", "Usuario")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("MarriottVisitantes.Dominio.Entidades.Visitante", b =>
                 {
                     b.Navigation("Visitas");
+                });
+
+            modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.Rol", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("MarriottVisitantes.Repositorio.Identidad.Usuario", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

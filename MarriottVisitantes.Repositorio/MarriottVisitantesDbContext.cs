@@ -7,14 +7,13 @@ using MarriottVisitantes.Repositorio.Identidad;
 
 namespace MarriottVisitantes.Repositorio
 {
-    public class MarriottVisitantesDbContext : IdentityDbContext<Usuario, IdentityRole<int>, int>
+    public class MarriottVisitantesDbContext : IdentityDbContext<Usuario, Rol, int>
     {
         public MarriottVisitantesDbContext(DbContextOptions<MarriottVisitantesDbContext> options) : base(options)
         {
 
         }
 
-        //public DbSet<Usuario> Usuarios => Set<Usuario>();
         public DbSet<Visitante> Visitantes {get; set;}
         public DbSet<Visita> Visitas { get; set; }
 
@@ -32,15 +31,32 @@ namespace MarriottVisitantes.Repositorio
                 SegundoApellido = "Navarro",
                 Email = "dfchacon@uned.cr"
             };
-            
+
             daniel.PasswordHash = new PasswordHasher<Usuario>().HashPassword(daniel, daniel.PasswordHash);
             modelBuilder.Entity<Usuario>(usuario =>
             {
                 usuario.HasData(daniel);
             });
 
-            modelBuilder.Entity<UsuarioRol>()
-                .HasKey(ur => new {ur.UserId, ur.RoleId});
+            var rolAdministrador = new Rol
+            {
+                Id = 1,
+                Name = "Administrador",
+                NormalizedName = "ADMINISTRADOR"
+            };
+            var rolUsuario = new Rol
+            {
+                Id = 2,
+                Name = "Usuario",
+                NormalizedName = "USUARIO"
+            };
+            
+            modelBuilder.Entity<Rol>(rol =>
+            {
+                rol.HasData(rolAdministrador);
+                rol.HasData(rolUsuario);
+            });
+
             modelBuilder.Entity<UsuarioRol>()
                 .HasOne(ur => ur.Usuario)
                 .WithMany(u => u.Roles)
@@ -49,6 +65,17 @@ namespace MarriottVisitantes.Repositorio
                 .HasOne(ur => ur.Rol)
                 .WithMany(r => r.Usuarios)
                 .HasForeignKey(ur => ur.RoleId);
+
+            var usuarioRol = new UsuarioRol
+            {
+                UserId = 1,
+                RoleId = 1,
+            };
+
+            modelBuilder.Entity<UsuarioRol>(ur =>
+            {
+                ur.HasData(usuarioRol);
+            });
         }
     }
 }

@@ -36,13 +36,12 @@ namespace MarriottVisitantes.Web
             services.AddDbContext<MarriottVisitantesDbContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddIdentity<Usuario, IdentityRole<int>>(options => 
+            services.AddIdentity<Usuario, Rol>(options => 
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;
             })
-                //.AddRoles<IdentityRole<int>>()
                 .AddUserStore<ApplicationUserStore>()
                 .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
                 .AddDefaultTokenProviders();

@@ -129,7 +129,8 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RoleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,9 +196,24 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { 1, "25c979da-08ea-4945-b626-bb830246aad1", "Administrador", "ADMINISTRADOR" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { 2, "36e14df8-24bb-4488-b293-2da3b7028776", "Usuario", "USUARIO" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "ConcurrencyStamp", "Email", "NormalizedEmail", "NormalizedUserName", "password", "primer_apellido", "primer_nombre", "segundo_apellido", "segundo_nombre", "nombre_usuario" },
-                values: new object[] { 1, null, "dfchacon@uned.cr", "DFCHACON@UNED.CR", "DANICHAC", "AQAAAAEAACcQAAAAEJ2pyvmEZTUkrbR+Bs2uWL+5lP5mJZQmhmSLfC64D2Kxk+bAoNP3PDYltNTHMuh3sw==", "Chacón", "Daniel", "Navarro", "", "danichac" });
+                values: new object[] { 1, null, "dfchacon@uned.cr", "DFCHACON@UNED.CR", "DANICHAC", "AQAAAAEAACcQAAAAEGx9HlqOUbBWwwmdAbafglbMEj2weso/0pppBuQ5Bc1F9aTHpFIK5o9NUNc51rh7bQ==", "Chacón", "Daniel", "Navarro", "", "danichac" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId", "Discriminator" },
+                values: new object[] { 1, 1, "UsuarioRol" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

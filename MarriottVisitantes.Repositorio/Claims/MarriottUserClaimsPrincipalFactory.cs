@@ -7,10 +7,10 @@ using System.Security.Claims;
 
 namespace MarriottVisitantes.Repositorio.Claims
 {
-    public class MarriottUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<Usuario, IdentityRole<int>>
+    public class MarriottUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<Usuario, Rol>
     {
         public MarriottUserClaimsPrincipalFactory(UserManager<Usuario> userManager,
-            RoleManager<IdentityRole<int>> roleManager,
+            RoleManager<Rol> roleManager,
             IOptions<IdentityOptions> options) : base(userManager, roleManager, options)
         {
             
