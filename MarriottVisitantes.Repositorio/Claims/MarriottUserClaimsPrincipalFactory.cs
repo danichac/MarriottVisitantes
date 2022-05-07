@@ -18,9 +18,11 @@ namespace MarriottVisitantes.Repositorio.Claims
 
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(Usuario usuario)
         {
+            
             var identidad = await base.GenerateClaimsAsync(usuario);
             var nombreCompleto = $"{usuario.PrimerNombre} {usuario.PrimerApellido}";
             identidad.AddClaim(new Claim("NombreApellido", nombreCompleto));
+
 
             return identidad;
         }

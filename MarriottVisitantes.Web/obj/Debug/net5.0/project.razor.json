@@ -15624,6 +15624,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Admin\\AgregarUsuario.cshtml",
+      "TargetPath": "Views\\Admin\\AgregarUsuario.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "\\\\mac\\Home\\Desktop\\Proyecto de graduación\\ProyectoHotelMarriott\\MarriottVisitantes.Web\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"

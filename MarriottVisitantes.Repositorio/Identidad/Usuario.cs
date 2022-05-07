@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MarriottVisitantes.Dominio.DTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace MarriottVisitantes.Repositorio.Identidad
@@ -97,6 +99,8 @@ namespace MarriottVisitantes.Repositorio.Identidad
         [NotMapped]
         public override bool PhoneNumberConfirmed { get; set; } 
 
+        public ICollection<UsuarioRol> Roles {get; set;}
+
         public void Actualizar(Usuario usuario)
         {
             UserName = usuario.UserName;
@@ -104,11 +108,15 @@ namespace MarriottVisitantes.Repositorio.Identidad
             Email = usuario.Email;
         }
 
-        public void Actualizar(string userName, string email, string password)
+        public void Actualizar(UsuarioCreacionDTO usuario)
         {
-            UserName = userName;
-            Email = email;
-            PasswordHash = new PasswordHasher<Usuario>().HashPassword(this, password);
+            UserName = usuario.UserName;
+            PrimerNombre = usuario.PrimerNombre;
+            SegundoNombre = usuario.SegundoNombre;
+            PrimerApellido = usuario.PrimerApellido;
+            SegundoApellido = usuario.SegundoApellido;
+            Email = usuario.Email;
+            PasswordHash = new PasswordHasher<Usuario>().HashPassword(this, usuario.Password);
         }
 
         public string Validar()

@@ -42,6 +42,7 @@ namespace MarriottVisitantes.Web
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;
             })
+                //.AddRoles<IdentityRole<int>>()
                 .AddUserStore<ApplicationUserStore>()
                 .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
                 .AddDefaultTokenProviders();

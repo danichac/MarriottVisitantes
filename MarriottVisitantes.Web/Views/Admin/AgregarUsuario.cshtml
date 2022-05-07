@@ -1,0 +1,58 @@
+@model UsuarioCreacionViewModel
+@{
+    ViewData["Title"] = "Marriott Costa Rica";
+}
+<div class="container-xl px-5">
+    <div class="d-flex mt-10 mb-4 align-items-center">
+        <img class="me-4" src="~/assets/img/icons/select.svg" alt="..." style="height: 48px">
+        <h1 class="page-header mb-0">Agregar Usuario</h1>
+    </div>
+    <hr class="my-5">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+        <form asp-controller="Admin" asp-action="AgregarUsuario" method="post">
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="UserName" id="NombreUsuario" type="text" placeholder="Nombre de usuario"/>
+                <label asp-for="UserName" for="NombreUsuario">Nombre de usuario</label>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="PrimerNombre" id="PrimerNombre" type="text" placeholder="Primer Nombre"/>
+                <label asp-for="PrimerNombre" for="PrimerNombre">Primer Nombre</label>
+                <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="SegundoNombre" id="SegundoNombre" type="text" placeholder="Segundo Nombre"/>
+                <label asp-for="SegundoNombre" for="SegundoNombre">Segundo Nombre</label>
+                <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="PrimerApellido" id="PrimerApellido" type="text" placeholder="Primer Apellido"/>
+                <label asp-for="PrimerApellido" for="PrimerApellido">Primer Apellido</label>
+                <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="SegundoApellido" id="SegundoApellido" type="text" placeholder="Segundo Apellido"/>
+                <label asp-for="SegundoApellido" for="SegundoApellido">Segundo Apellido</label>
+                <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="Email" id="Email" type="email" placeholder="nombre@ejemplo.com" />
+                <label asp-for="Email" for="Email">Correo electrónico</label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="Password" id="Password" type="password" placeholder="Contraseña"/>
+                <label asp-for="Password" for="Password">Contraseña</label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <select asp-for="Rol" class="form-select" id="Rol" aria-label="Default select options">
+                    <option value="@Constantes.RolUsuario">@Constantes.RolUsuario</option>
+                    <option value="@Constantes.RolAdministrador">@Constantes.RolAdministrador</option>
+                </select>
+                <label asp-for=Rol for="Rol">Rol</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Agregar</button>
+        </form>
+    </div>
+</div>

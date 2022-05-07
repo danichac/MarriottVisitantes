@@ -1,5 +1,6 @@
 
 using System.Threading.Tasks;
+using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Repositorio.Identidad;
 using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Servicios.Interfaces;
@@ -11,11 +12,19 @@ namespace MarriottVisitantes.Servicios.Implementaciones
     {
 
         private readonly IRepositorioUsuario _repositorio;
+        private readonly UserManager<Usuario> _gestorUsuario;
     
-        public ServicioUsuarios(IRepositorioUsuario repositorio)
+        public ServicioUsuarios(IRepositorioUsuario repositorio, UserManager<Usuario> gestorUsuario)
         {
+            _gestorUsuario = gestorUsuario;
             _repositorio = repositorio;
         }
+
+        public async Task AgregarARol(Usuario usuario, string rol)
+        {
+            await _repositorio.AgregarARol(usuario, rol);
+        }
+
         public async Task<Usuario> BuscarPorEmailAsync(string email)
         {
             return await _repositorio.BuscarPorEmailAsync(email);
@@ -26,9 +35,15 @@ namespace MarriottVisitantes.Servicios.Implementaciones
             return await _repositorio.BuscarPorIdAsync(id);
         }
 
-        public async Task<IdentityResult> CrearAsync(string userName, string email, string password)
+        public async Task<IdentityResult> CrearAsync(UsuarioCreacionDTO usuario)
         {
-            return await _repositorio.CrearAsync(userName, email, password);
+            var result = await _repositorio.CrearAsync(usuario);
+            return result;
+        }
+
+        public async Task<bool> EmailExiste(string email)
+        {
+            return await _repositorio.EmailExiste(email);
         }
 
         public async Task<bool> IngresarAsync(string email, string password, bool recordarme)
@@ -44,6 +59,11 @@ namespace MarriottVisitantes.Servicios.Implementaciones
         public async Task SalirAsync()
         {
             await _repositorio.SalirAsync();
+        }
+
+        public async Task<bool> UserNameExiste(string userName)
+        {
+            return await _repositorio.UserNameExiste(userName);
         }
     }
 }

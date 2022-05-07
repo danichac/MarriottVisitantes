@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MarriottVisitantes.Repositorio.Identidad
 {
-    public class ApplicationUserStore: IUserPasswordStore<Usuario>
+    public class ApplicationUserStore: IUserPasswordStore<Usuario>, IUserRoleStore<Usuario>
     {
         private readonly ILogger<ApplicationUserStore> logger;
         private readonly MarriottVisitantesDbContext context;
@@ -18,6 +20,19 @@ namespace MarriottVisitantes.Repositorio.Identidad
             this.logger = logger;
             this.context = context;
         }
+
+        public async Task AddToRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        {
+            var roleId = await context.Roles.Where(r => r.Name == roleName)
+                .Select(r => r.Id).FirstOrDefaultAsync();
+            var userRole = new IdentityUserRole<int>();
+            userRole.RoleId = roleId;
+            userRole.UserId = user.Id;
+
+            await context.UserRoles.AddAsync(userRole);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IdentityResult> CreateAsync(Usuario usuario, CancellationToken cancellationToken)
         {
             // validacion
@@ -28,15 +43,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
             }
             using(IDbContextTransaction transaction = context.Database.BeginTransaction())
             {
-                if(await context.Users
-                    .AnyAsync(u => u.Email == usuario.Email,
-                    cancellationToken))
-                {
-                    return IdentityResult.Failed(new IdentityError { Description = "Su e-mail ya ha sido utilizado." });
-                }
-                var usuarioNuevo = new Usuario();
-                usuarioNuevo.Actualizar(usuario);
-                await context.Users.AddAsync(usuarioNuevo, cancellationToken);
+                await context.Users.AddAsync(usuario, cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync();
                 return IdentityResult.Success;
@@ -80,6 +87,16 @@ namespace MarriottVisitantes.Repositorio.Identidad
         {
             return await Task.FromResult(usuario.PasswordHash);
         }
+
+        public async Task<IList<string>> GetRolesAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            var userRolesIds = await context.UserRoles.Where(ur => ur.UserId == user.Id)
+                .Select(x => x.RoleId).ToListAsync();
+            var roles = await context.Roles.Where(r => userRolesIds.Contains(r.Id))
+                .Select(r => r.Name).ToListAsync();
+            return roles;
+        }
+
         public async Task<string> GetUserIdAsync(Usuario usuario, CancellationToken cancellationToken)
         {
             return await Task.FromResult(usuario.Id.ToString());
@@ -88,10 +105,44 @@ namespace MarriottVisitantes.Repositorio.Identidad
         {
             return await Task.FromResult(usuario.UserName);
         }
+
+        public async Task<IList<Usuario>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            var roleId = await context.Roles.Where(r => r.Name == roleName)
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
+
+            var userIds = await context.UserRoles.Where(ur => ur.RoleId == roleId)
+                .Select(x => x.UserId).ToListAsync();
+
+            var users = await context.Users.Where(u => userIds.Contains(u.Id))
+                .Select(x => x).ToListAsync();
+
+            return users;
+        }
+
         public async Task<bool> HasPasswordAsync(Usuario usuario, CancellationToken cancellationToken)
         {
             return await Task.FromResult(true);
         }
+
+        public async Task<bool> IsInRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        {
+            var roleId = await context.Roles.Where(r => r.Name == roleName)
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
+
+            var userIds = await context.UserRoles.Where(ur => ur.RoleId == roleId)
+                .Select(x => x.UserId).ToListAsync();
+
+            return userIds.Contains(user.Id);
+        }
+
+        public Task RemoveFromRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task SetNormalizedUserNameAsync(Usuario usuario, string normalizedName, CancellationToken cancellationToken)
         {
             await Task.Run(() => {});

@@ -8,6 +8,7 @@ using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Repositorio.Identidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using MarriottVisitantes.Dominio.DTOs;
 
 namespace MarriottVisitantes.Repositorio.Implementaciones
 {
@@ -17,16 +18,19 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
         private readonly SignInManager<Usuario> _signInManager;
         private readonly MarriottVisitantesDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<Usuario> _gestorUsuarios;
 
         public RepositorioUsuarios(ILogger<RepositorioUsuarios> logger,
             SignInManager<Usuario> signInManager,
             MarriottVisitantesDbContext context,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<Usuario> gestorUsuarios)
         {
             _logger = logger;
             _signInManager = signInManager;
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _gestorUsuarios = gestorUsuarios;
         }
 
         public Task<Usuario> BuscarPorEmailAsync(string email)
@@ -39,11 +43,12 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             return _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IdentityResult> CrearAsync(string userName, string email, string password)
+        public async Task<IdentityResult> CrearAsync(UsuarioCreacionDTO usuario)
         {
-            var usuario = new Usuario();
-            usuario.Actualizar(userName, email, password);
-            return await _signInManager.UserManager.CreateAsync(usuario);
+            var nuevoUsuario = new Usuario();
+            nuevoUsuario.Actualizar(usuario);
+            
+            return await _signInManager.UserManager.CreateAsync(nuevoUsuario);
         }
 
         public async ValueTask<Usuario?> ObtenerUsuarioIngresadoAsync()
@@ -77,7 +82,7 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             if(usuario is null){
                 return false;
             }
-
+            
             var resultado = await _signInManager.PasswordSignInAsync(usuario, password, recordarme, false);
 
             return resultado.Succeeded;
@@ -86,6 +91,21 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
         public async Task SalirAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<bool> EmailExiste(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
+
+        public async Task<bool> UserNameExiste(string userName)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == userName);
+        }
+
+        public async Task AgregarARol(Usuario usuario, string rol)
+        {
+            await _gestorUsuarios.AddToRoleAsync(usuario, rol);
         }
     }
 }

@@ -38,6 +38,17 @@ namespace MarriottVisitantes.Repositorio
             {
                 usuario.HasData(daniel);
             });
+
+            modelBuilder.Entity<UsuarioRol>()
+                .HasKey(ur => new {ur.UserId, ur.RoleId});
+            modelBuilder.Entity<UsuarioRol>()
+                .HasOne(ur => ur.Usuario)
+                .WithMany(u => u.Roles)
+                .HasForeignKey(ur => ur.UserId);
+            modelBuilder.Entity<UsuarioRol>()
+                .HasOne(ur => ur.Rol)
+                .WithMany(r => r.Usuarios)
+                .HasForeignKey(ur => ur.RoleId);
         }
     }
 }
