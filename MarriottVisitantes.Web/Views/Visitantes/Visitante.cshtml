@@ -1,0 +1,11 @@
+@model MarriottVisitantes.Dominio.Entidades.Visitante
+@{
+    ViewData["Title"] = "Marriott Costa Rica";
+}
+<div class="text-center mb-4">
+    <h1 class="display-4">Datos del visitante</h1>
+</div>
+<p>Cedula: @Model.Cedula</p>
+<p>Nombre: @Model.PrimerNombre</p>
+<p>Apellido: @Model.PrimerApellido</p>
+<p>Empresa: @Model.NombreEmpresa</p>

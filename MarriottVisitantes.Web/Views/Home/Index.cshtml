@@ -4,45 +4,150 @@
     ViewData["Title"] = "Marriott Costa Rica";
 }
 
-<div class="text-center">
+<div class="text-center mb-4">
     <h1 class="display-4">Visitantes del día</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<table class="table table-bordered table-hover table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Empresa</th>
-            <th scope="col">N° Gafete</th>
-            <th scope="col">Color Gafete</th>
-            <th scope="col">Hora entrada</th>
-            <th scope="col">Visita</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var visita in Model.Visitas)
-        {
+<div id="no-terminadas-container">
+    <div class="text-start mb-4">
+        <h2 class="display-4">Visitas no terminadas</h2>
+    </div>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
             <tr>
-                <th scope="row">1</th>
-                <td>@visita.Visitante.PrimerNombre</td>
-                <td>@visita.Visitante.PrimerApellido</td>
-                <td>@visita.Visitante.NombreEmpresa</td>
-                <td>@visita.NumeroGafete</td>
-                <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
-                <td>@visita.HoraEntrada</td>
-                <td>
-                    @if(visita.VisitaTerminada)
-                    {
-                        <span class="badge bg-success">Terminada</span>
-                    } else
-                    {
-                        <span class="badge bg-danger">No terminada</span>
-                    }
-                </td>
+                <th scope="col">#Cédula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">N° Gafete</th>
+                <th scope="col">Color Gafete</th>
+                <th scope="col">Hora entrada</th>
+                <th scope="col">Visita</th>
+                <th scope="col">Acción</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var visita in Model.VisitasNoTerminadas.Visitas)
+            {
+                <tr>
+                    <th scope="row">
+                        <a class="nav-link" 
+                            asp-controller="Visitantes" 
+                            asp-action="Visitante"
+                            asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
+                    </th>
+                    <td>@visita.Visitante.PrimerNombre</td>
+                    <td>@visita.Visitante.PrimerApellido</td>
+                    <td>@visita.Visitante.NombreEmpresa</td>
+                    <td>@visita.NumeroGafete</td>
+                    <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                    <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
+                    <td>
+                        @if(visita.VisitaTerminada)
+                        {
+                            <span class="badge bg-success">Terminada</span>
+                        } else
+                        {
+                            <span class="badge bg-danger">No terminada</span>
+                        }
+                    </td>
+                    <td>
+                        <form asp-controller="Visitas" asp-action="Terminar" method="post" asp-route-idVisita="@visita.IdVisita">
+                            <button class="btn btn-raised-success btn-sm" type="submit">Terminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            @foreach (var pagina in Enumerable.Range(1, Model.VisitasNoTerminadas.CantidadPaginas))
+            {
+                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-indicePagina="@pagina">@pagina</a></li>
+            }
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div id="terminadas-container">
+    <div class="text-start mb-4">
+        <h2 class="display-4">Visitas terminadas</h2>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#Cédula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">N° Gafete</th>
+                <th scope="col">Color Gafete</th>
+                <th scope="col">Hora entrada</th>
+                <th scope="col">Hora salida</th>
+                <th scope="col">Visita</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var visita in Model.VisitasTerminadas.Visitas)
+            {
+                <tr>
+                    <th scope="row">
+                        <a class="nav-link" 
+                            asp-controller="Visitantes" 
+                            asp-action="Visitante"
+                            asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
+                    </th>
+                    <td>@visita.Visitante.PrimerNombre</td>
+                    <td>@visita.Visitante.PrimerApellido</td>
+                    <td>@visita.Visitante.NombreEmpresa</td>
+                    <td>@visita.NumeroGafete</td>
+                    <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                    <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
+                    <td>@visita.HoraSalida?.ToString("h:mm tt")</td>
+                    <td>
+                        @if(visita.VisitaTerminada)
+                        {
+                            <span class="badge bg-success">Terminada</span>
+                        } else
+                        {
+                            <span class="badge bg-danger">No terminada</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            @foreach (var pagina in Enumerable.Range(1, Model.VisitasTerminadas.CantidadPaginas))
+            {
+                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-indicePagina="@pagina">@pagina</a></li>
+            }
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+

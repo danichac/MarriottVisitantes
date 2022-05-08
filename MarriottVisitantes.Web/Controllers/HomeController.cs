@@ -9,6 +9,7 @@ using MarriottVisitantes.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Servicios.Interfaces;
+using MarriottVisitantes.Web.Models.ViewModels;
 
 namespace MarriottVisitantes.Web.Controllers
 {
@@ -26,8 +27,12 @@ namespace MarriottVisitantes.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Index(int indicePagina = 1)
         {
-            var visitas = await _servicioVisitas.ObtenerVisitas(indicePagina);
-            return View(visitas);
+            var visitasTerminadas = await _servicioVisitas.ObtenerVisitas(indicePagina, true);
+            var visitasNoTerminadas = await _servicioVisitas.ObtenerVisitas(indicePagina, false);
+
+            var totalVisitas = new VisitasPaginacionViewModel(visitasTerminadas, visitasNoTerminadas);
+
+            return View(totalVisitas);
         }
 
         public IActionResult Login()

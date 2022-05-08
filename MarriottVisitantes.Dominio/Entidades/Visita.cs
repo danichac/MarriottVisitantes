@@ -28,11 +28,16 @@ namespace MarriottVisitantes.Dominio.Entidades
         [Required]
         public DateTime HoraEntrada { get; set; }
 
-        public DateTime HoraSalida { get; set; }
+        public DateTime? HoraSalida { get; set; }
 
         [Required]
         public DateTime FechaVisita { get; set; }
 
         public bool VisitaTerminada { get; set; }
+
+        public void TerminarVisita()
+        {
+            VisitaTerminada = true;
+        }
     }
 }

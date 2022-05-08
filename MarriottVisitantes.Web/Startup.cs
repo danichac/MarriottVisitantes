@@ -48,8 +48,10 @@ namespace MarriottVisitantes.Web
             services.AddScoped<IUserClaimsPrincipalFactory<Usuario>,MarriottUserClaimsPrincipalFactory>();
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarios>();
             services.AddScoped<IRepositorioVisitas, RepositorioVisitas>();
+            services.AddScoped<IRepositorioVisitante, RepositorioVisitante>();
             services.AddScoped<IServicioUsuarios, ServicioUsuarios>();
             services.AddScoped<IServicioVisitas, ServicioVisitas>();
+            services.AddScoped<IServicioVisitante, ServicioVisitante>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
