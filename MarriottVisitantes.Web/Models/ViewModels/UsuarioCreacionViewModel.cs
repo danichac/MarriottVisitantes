@@ -31,6 +31,8 @@ namespace MarriottVisitantes.Web.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
+
+        public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
     }
 }

@@ -7,22 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MarriottVisitantes.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using MarriottVisitantes.Repositorio.Interfaces;
+using MarriottVisitantes.Servicios.Interfaces;
 
 namespace MarriottVisitantes.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IServicioVisitas _servicioVisitas;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IServicioVisitas servicioVisitas)
         {
             _logger = logger;
+            _servicioVisitas = servicioVisitas;
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int indicePagina = 1)
         {
-            return View();
+            var visitas = await _servicioVisitas.ObtenerVisitas(indicePagina);
+            return View(visitas);
         }
 
         public IActionResult Login()

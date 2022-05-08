@@ -1,8 +1,48 @@
-﻿@{
+﻿@model VisitasPaginacionViewModel
+
+@{
     ViewData["Title"] = "Marriott Costa Rica";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Visitantes del día</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">N° Gafete</th>
+            <th scope="col">Color Gafete</th>
+            <th scope="col">Hora entrada</th>
+            <th scope="col">Visita</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var visita in Model.Visitas)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@visita.Visitante.PrimerNombre</td>
+                <td>@visita.Visitante.PrimerApellido</td>
+                <td>@visita.Visitante.NombreEmpresa</td>
+                <td>@visita.NumeroGafete</td>
+                <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                <td>@visita.HoraEntrada</td>
+                <td>
+                    @if(visita.VisitaTerminada)
+                    {
+                        <span class="badge bg-success">Terminada</span>
+                    } else
+                    {
+                        <span class="badge bg-danger">No terminada</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
