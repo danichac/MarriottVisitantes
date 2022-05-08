@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MarriottVisitantes.Dominio.Entidades;
 using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Dominio.Extensiones;
 
 namespace MarriottVisitantes.Repositorio
 {

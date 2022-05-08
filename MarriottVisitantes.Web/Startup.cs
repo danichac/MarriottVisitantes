@@ -47,7 +47,9 @@ namespace MarriottVisitantes.Web
                 .AddDefaultTokenProviders();
             services.AddScoped<IUserClaimsPrincipalFactory<Usuario>,MarriottUserClaimsPrincipalFactory>();
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarios>();
+            services.AddScoped<IRepositorioVisitas, RepositorioVisitas>();
             services.AddScoped<IServicioUsuarios, ServicioUsuarios>();
+            services.AddScoped<IServicioVisitas, ServicioVisitas>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

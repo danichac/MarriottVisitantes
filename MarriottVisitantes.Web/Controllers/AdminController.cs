@@ -39,13 +39,16 @@ namespace MarriottVisitantes.Web.Controllers
             {
                 var emailExiste = await _servicioUsuario.EmailExiste(model.Email);
                 var userNameExiste = await _servicioUsuario.UserNameExiste(model.UserName);
+                var contrasenaCoincide = model.Password == model.PasswordConfirm;
 
                 if(userNameExiste)
                     ModelState.AddModelError("UserName", "El nombre de usuario ingresado ya existe");
                 if(emailExiste)
                     ModelState.AddModelError("Email", "El correo electrónico ingresado ya existe");
+                if(!contrasenaCoincide)
+                    ModelState.AddModelError("PasswordConfirm", "La contraseña no coincide");
 
-                if(!userNameExiste && !emailExiste)
+                if(!userNameExiste && !emailExiste && contrasenaCoincide)
                 {
                     var creacionResultado = await _servicioUsuario.CrearAsync(model);
                     if(creacionResultado.Succeeded)
