@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarriottVisitantes.Repositorio.Migrations
 {
     [DbContext(typeof(MarriottVisitantesDbContext))]
-    [Migration("20220507171640_FirstMigration")]
+    [Migration("20220508022359_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,13 +18,54 @@ namespace MarriottVisitantes.Repositorio.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.16");
 
+            modelBuilder.Entity("MarriottVisitantes.Dominio.Entidades.ColorGafete", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(12)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ColorGafete");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Color = "Negro"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Color = "Amarillo"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Color = "Café"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Color = "Rojo"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Color = "Verde"
+                        });
+                });
+
             modelBuilder.Entity("MarriottVisitantes.Dominio.Entidades.Visita", b =>
                 {
                     b.Property<int>("IdVisita")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ColorGafete")
+                    b.Property<int>("ColorGafeteId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaVisita")
@@ -49,6 +90,8 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("IdVisita");
+
+                    b.HasIndex("ColorGafeteId");
 
                     b.HasIndex("VisitanteIdVisitante");
 
@@ -125,14 +168,14 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "25c979da-08ea-4945-b626-bb830246aad1",
+                            ConcurrencyStamp = "0e0303b5-56ea-470a-a188-0de032588030",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "36e14df8-24bb-4488-b293-2da3b7028776",
+                            ConcurrencyStamp = "bc47357d-ae78-4d13-9a37-b41fd716bca8",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
                         });
@@ -214,7 +257,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGx9HlqOUbBWwwmdAbafglbMEj2weso/0pppBuQ5Bc1F9aTHpFIK5o9NUNc51rh7bQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEd7AkMF3FJrDzO5IT472l+Kb15pcVDVl5kLq7rABZiht+z/2WIqohs9fYpkzoB7Hg==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",
@@ -344,9 +387,17 @@ namespace MarriottVisitantes.Repositorio.Migrations
 
             modelBuilder.Entity("MarriottVisitantes.Dominio.Entidades.Visita", b =>
                 {
+                    b.HasOne("MarriottVisitantes.Dominio.Entidades.ColorGafete", "ColorGafete")
+                        .WithMany()
+                        .HasForeignKey("ColorGafeteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.Visitante", "Visitante")
                         .WithMany("Visitas")
                         .HasForeignKey("VisitanteIdVisitante");
+
+                    b.Navigation("ColorGafete");
 
                     b.Navigation("Visitante");
                 });

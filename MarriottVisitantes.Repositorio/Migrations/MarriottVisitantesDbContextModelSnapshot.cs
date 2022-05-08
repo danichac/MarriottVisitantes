@@ -166,14 +166,14 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "f6481adf-0c51-4e04-b73d-911ee30f4805",
+                            ConcurrencyStamp = "0e0303b5-56ea-470a-a188-0de032588030",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "11c07ac4-501a-4fd2-98ba-f96514068249",
+                            ConcurrencyStamp = "bc47357d-ae78-4d13-9a37-b41fd716bca8",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
                         });
@@ -255,7 +255,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB4KxCUBC+0la7Je4bTjg/FA06LHtFZlHdlAbyl0Q4yyqHHb7oZgvDy/K3qFRufLzA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEd7AkMF3FJrDzO5IT472l+Kb15pcVDVl5kLq7rABZiht+z/2WIqohs9fYpkzoB7Hg==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",

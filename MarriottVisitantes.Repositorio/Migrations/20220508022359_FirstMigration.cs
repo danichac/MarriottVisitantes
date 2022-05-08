@@ -45,6 +45,18 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ColorGafete",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    Color = table.Column<string>(type: "TEXT", maxLength: 12, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ColorGafete", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Visitantes",
                 columns: table => new
                 {
@@ -177,7 +189,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     IdVisitante = table.Column<int>(type: "INTEGER", nullable: false),
                     VisitanteIdVisitante = table.Column<long>(type: "INTEGER", nullable: true),
-                    ColorGafete = table.Column<int>(type: "INTEGER", nullable: false),
+                    ColorGafeteId = table.Column<int>(type: "INTEGER", nullable: false),
                     NumeroGafete = table.Column<int>(type: "INTEGER", nullable: false),
                     HoraEntrada = table.Column<DateTime>(type: "TEXT", nullable: false),
                     HoraSalida = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -187,6 +199,12 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Visitas", x => x.IdVisita);
+                    table.ForeignKey(
+                        name: "FK_Visitas_ColorGafete_ColorGafeteId",
+                        column: x => x.ColorGafeteId,
+                        principalTable: "ColorGafete",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Visitas_Visitantes_VisitanteIdVisitante",
                         column: x => x.VisitanteIdVisitante,
@@ -198,17 +216,42 @@ namespace MarriottVisitantes.Repositorio.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "25c979da-08ea-4945-b626-bb830246aad1", "Administrador", "ADMINISTRADOR" });
+                values: new object[] { 1, "0e0303b5-56ea-470a-a188-0de032588030", "Administrador", "ADMINISTRADOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "36e14df8-24bb-4488-b293-2da3b7028776", "Usuario", "USUARIO" });
+                values: new object[] { 2, "bc47357d-ae78-4d13-9a37-b41fd716bca8", "Usuario", "USUARIO" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "ConcurrencyStamp", "Email", "NormalizedEmail", "NormalizedUserName", "password", "primer_apellido", "primer_nombre", "segundo_apellido", "segundo_nombre", "nombre_usuario" },
-                values: new object[] { 1, null, "dfchacon@uned.cr", "DFCHACON@UNED.CR", "DANICHAC", "AQAAAAEAACcQAAAAEGx9HlqOUbBWwwmdAbafglbMEj2weso/0pppBuQ5Bc1F9aTHpFIK5o9NUNc51rh7bQ==", "Chacón", "Daniel", "Navarro", "", "danichac" });
+                values: new object[] { 1, null, "dfchacon@uned.cr", "DFCHACON@UNED.CR", "DANICHAC", "AQAAAAEAACcQAAAAEEd7AkMF3FJrDzO5IT472l+Kb15pcVDVl5kLq7rABZiht+z/2WIqohs9fYpkzoB7Hg==", "Chacón", "Daniel", "Navarro", "", "danichac" });
+
+            migrationBuilder.InsertData(
+                table: "ColorGafete",
+                columns: new[] { "Id", "Color" },
+                values: new object[] { 1, "Negro" });
+
+            migrationBuilder.InsertData(
+                table: "ColorGafete",
+                columns: new[] { "Id", "Color" },
+                values: new object[] { 2, "Amarillo" });
+
+            migrationBuilder.InsertData(
+                table: "ColorGafete",
+                columns: new[] { "Id", "Color" },
+                values: new object[] { 3, "Café" });
+
+            migrationBuilder.InsertData(
+                table: "ColorGafete",
+                columns: new[] { "Id", "Color" },
+                values: new object[] { 4, "Rojo" });
+
+            migrationBuilder.InsertData(
+                table: "ColorGafete",
+                columns: new[] { "Id", "Color" },
+                values: new object[] { 5, "Verde" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -253,6 +296,11 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Visitas_ColorGafeteId",
+                table: "Visitas",
+                column: "ColorGafeteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Visitas_VisitanteIdVisitante",
                 table: "Visitas",
                 column: "VisitanteIdVisitante");
@@ -283,6 +331,9 @@ namespace MarriottVisitantes.Repositorio.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ColorGafete");
 
             migrationBuilder.DropTable(
                 name: "Visitantes");
