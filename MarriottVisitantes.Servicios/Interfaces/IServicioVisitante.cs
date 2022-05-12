@@ -10,5 +10,7 @@ namespace MarriottVisitantes.Servicios.Interfaces
         public Task<IList<Visitante>> VisitantesPorEmpresa(string nombreEmpresa);
         public Task AgregarVisitante(Visitante visitante);
         public Task ActualizarVisitante(Visitante visitante);
+        public Task<IList<string>> ObtenerTodasCedulas();
+        public Task<IList<string>> ListaDeEmpresas();
     }
 }

@@ -32,14 +32,14 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
 
         public Task<Visita> BuscarPorId(int id)
         {
-            var visita = _context.Visitas.Where(v => v.IdVisita == id)
+            var visita = _context.Visitas.Where(v => v.Id == id)
                 .FirstOrDefaultAsync();
             return visita;
         }
 
         public async Task<IList<Visita>> GetVisitasPorVisitante(int idVisitante)
         {
-            var visitas = await _context.Visitas.Where(v => v.IdVisitante == idVisitante)
+            var visitas = await _context.Visitas.Where(v => v.Id == idVisitante)
                 .Select(v => v)
                 .ToListAsync();
             

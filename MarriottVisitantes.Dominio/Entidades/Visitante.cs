@@ -12,7 +12,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         }
 
         [Key]
-        public long IdVisitante { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MaxLength(50)]

@@ -30,6 +30,16 @@ namespace MarriottVisitantes.Servicios.Implementaciones
             return await _repositorioVisitante.BuscarPorCedula(cedula);
         }
 
+        public async Task<IList<string>> ListaDeEmpresas()
+        {
+            return await _repositorioVisitante.ListaDeEmpresas();
+        }
+
+        public async Task<IList<string>> ObtenerTodasCedulas()
+        {
+            return await _repositorioVisitante.ObtenerTodasCedulas();
+        }
+
         public async Task<IList<Visitante>> VisitantesPorEmpresa(string nombreEmpresa)
         {
             return await _repositorioVisitante.VisitantesPorEmpresa(nombreEmpresa);

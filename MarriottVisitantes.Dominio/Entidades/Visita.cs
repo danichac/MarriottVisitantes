@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using MarriottVisitantes.Repositorio.Identidad;
 
 namespace MarriottVisitantes.Dominio.Entidades
 {
@@ -11,17 +12,21 @@ namespace MarriottVisitantes.Dominio.Entidades
         }
 
         [Key]
-        public int IdVisita { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public int IdVisitante { get; set; }
-
         public Visitante Visitante { get; set; }
+
+        [Required]
+        public Usuario Usuario { get; set; }
 
         [Required]
         public GafeteId ColorGafeteId { get; set; }
 
         public ColorGafete ColorGafete { get; set; }
+
+        [MaxLength(8)]
+        public string Temperatura { get; set; }
 
         public int NumeroGafete { get; set; }
 

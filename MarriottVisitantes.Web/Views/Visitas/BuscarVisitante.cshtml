@@ -1,0 +1,40 @@
+@model BuscarVisitanteViewModel
+@{
+    ViewData["Title"] = "Marriott Costa Rica";
+    var returnURL = @Context.Request.Path.Value;
+}
+
+<div class="container-xl px-5">
+    <div class="text-start mb-4">
+        <h1 class="display-4">Buscar visitante</h1>
+    </div>
+    <hr class="my-5">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+        <form asp-controller="Visitas" asp-action="ElegirVisitante" method="get">
+            @*<div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="Cedula" id="Cedula" type="text" placeholder="Identificación"/>
+                <label asp-for="Cedula" for="Cedula">Identificación</label>
+                <span asp-validation-for="Cedula" class="text-danger"></span>
+            </div>*@
+            <div class="form-floating mb-4 w-auto">
+                <select asp-for="Cedula" class="form-select" id="Cedula" aria-label="Cedulas activas">
+                    @foreach (var cedula in Model.CedulasActivas)
+                    {
+                        <option value="@cedula">@cedula</option>
+                    }
+                </select>
+                <label asp-for=Cedula for="Cedula">Seleccionar identificación</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <select asp-for="NombreEmpresa" class="form-select" id="NombreEmpresa" aria-label="Empresas">
+                    @foreach (var empresa in Model.ListaEmpresas)
+                    {
+                        <option value="@empresa">@empresa</option>
+                    }
+                </select>
+                <label asp-for=NombreEmpresa for="NombreEmpresa">Seleccionar empresa</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+    </div>
+</div>

@@ -38,6 +38,16 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             return visitante;
         }
 
+        public async Task<IList<string>> ListaDeEmpresas()
+        {
+            return await _context.Visitantes.Select(x => x.NombreEmpresa).Distinct().ToListAsync();
+        }
+
+        public async Task<IList<string>> ObtenerTodasCedulas()
+        {
+            return await _context.Visitantes.Select(x => x.Cedula).ToListAsync();
+        }
+
         public async Task<IList<Visitante>> VisitantesPorEmpresa(string nombreEmpresa)
         {
             var visitantes = await _context.Visitantes
