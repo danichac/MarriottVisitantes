@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MarriottVisitantes.Dominio.Entidades;
-using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Dominio.Identidad;
 using MarriottVisitantes.Dominio.Extensiones;
 
 namespace MarriottVisitantes.Repositorio
@@ -19,6 +19,7 @@ namespace MarriottVisitantes.Repositorio
         public DbSet<Visitante> Visitantes {get; set;}
         public DbSet<Visita> Visitas { get; set; }
         public DbSet<ColorGafete> ColorGafete {get; set;}
+        public DbSet<TipoVisita> TipoVisita { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +40,24 @@ namespace MarriottVisitantes.Repositorio
                             {
                                 Id = g,
                                 Color = g.ObtenerDescripcion()
+                            })
+                );
+
+            modelBuilder
+                .Entity<Visita>()
+                .Property(v => v.TipoVisitaId);
+            modelBuilder
+                .Entity<TipoVisita>()
+                .Property(tp => tp.Id);
+            modelBuilder
+                .Entity<TipoVisita>()
+                .HasData(
+                    Enum.GetValues(typeof(TipoVisita))
+                        .Cast<TipoVisitaId>()
+                        .Select(t => new TipoVisita()
+                            {
+                                Id = t,
+                                Tipo = t.ObtenerDescripcion()
                             })
                 );
 

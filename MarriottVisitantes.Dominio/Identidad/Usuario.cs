@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MarriottVisitantes.Dominio.DTOs;
 using Microsoft.AspNetCore.Identity;
 
-namespace MarriottVisitantes.Repositorio.Identidad
+namespace MarriottVisitantes.Dominio.Identidad
 {
     public class Usuario : IdentityUser<int>
     {   

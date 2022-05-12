@@ -17,6 +17,7 @@ using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Repositorio.Implementaciones;
 using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Servicios.Implementaciones;
+using MarriottVisitantes.Dominio.Identidad;
 
 namespace MarriottVisitantes.Web
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Dominio.Identidad;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;

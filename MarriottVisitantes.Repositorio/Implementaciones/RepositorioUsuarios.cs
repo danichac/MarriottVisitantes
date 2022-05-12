@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using MarriottVisitantes.Repositorio.Interfaces;
-using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Dominio.Identidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using MarriottVisitantes.Dominio.DTOs;

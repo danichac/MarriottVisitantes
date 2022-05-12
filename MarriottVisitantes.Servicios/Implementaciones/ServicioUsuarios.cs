@@ -1,7 +1,7 @@
 
 using System.Threading.Tasks;
 using MarriottVisitantes.Dominio.DTOs;
-using MarriottVisitantes.Repositorio.Identidad;
+using MarriottVisitantes.Dominio.Identidad;
 using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Servicios.Interfaces;
 using Microsoft.AspNetCore.Identity;

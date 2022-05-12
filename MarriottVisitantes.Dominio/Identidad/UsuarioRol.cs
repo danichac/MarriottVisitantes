@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace MarriottVisitantes.Repositorio.Identidad
+namespace MarriottVisitantes.Dominio.Identidad
 {
     public class UsuarioRol : IdentityUserRole<int>
     {
