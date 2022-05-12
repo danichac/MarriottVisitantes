@@ -52,7 +52,7 @@ namespace MarriottVisitantes.Repositorio
             modelBuilder
                 .Entity<TipoVisita>()
                 .HasData(
-                    Enum.GetValues(typeof(TipoVisita))
+                    Enum.GetValues(typeof(TipoVisitaId))
                         .Cast<TipoVisitaId>()
                         .Select(t => new TipoVisita()
                             {
