@@ -135,5 +135,10 @@ namespace MarriottVisitantes.Dominio.Identidad
             }
             return "";
         }
+
+        public string GetNombreApellido()
+        {
+            return $"{PrimerNombre} {PrimerApellido}";
+        }
     }
 }

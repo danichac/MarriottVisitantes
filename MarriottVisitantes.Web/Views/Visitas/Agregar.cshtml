@@ -1,1 +1,80 @@
-<h1>Agregar visita</h1>
+@using MarriottVisitantes.Dominio.Entidades
+@model AgregarVisitasViewModel
+@{
+    ViewData["Title"] = "Marriott Costa Rica";
+    var mensajeExito = ViewData["Éxito"] as string;
+    var coloresGafete = Enum.GetValues(typeof(GafeteId))
+        .Cast<GafeteId>().Select(g => new ColorGafete()
+            {
+                Id = g,
+                Color = g.ObtenerDescripcion()
+            });
+    var tiposVisita = Enum.GetValues(typeof(TipoVisitaId))
+        .Cast<TipoVisitaId>().Select(t => new TipoVisita()
+            {
+                Id = t,
+                Tipo = t.ObtenerDescripcion()
+            });
+}
+
+<div class="container-xl px-5">
+    <div class="text-start mb-4">
+        <h1 class="display-4">Nueva visita</h1>
+    </div>
+    <hr class="my-5">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+        @if(!string.IsNullOrEmpty(mensajeExito))
+        {
+            <div class="alert alert-success" role="alert">
+                @mensajeExito
+            </div>
+        }
+        <form asp-controller="Visitas" asp-action="Agregar" method="post">
+            <input type="hidden" asp-for="Usuario.Id">
+            <input type="hidden" asp-for="Visitante.Id">
+            <div class="form-floating mb-4 w-auto">
+                <input disabled class="form-control" asp-for="Visitante.Cedula" id="Cedula" type="text" placeholder="Identificación"/>
+                <label asp-for="Visitante.Cedula" for="Cedula">Identificación</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input disabled class="form-control" asp-for="Visitante.PrimerNombre" id="PrimerNombre" type="text" placeholder="Primer Nombre"/>
+                <label asp-for="Visitante.PrimerNombre" for="PrimerNombre">Primer Nombre</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input disabled class="form-control" asp-for="Visitante.PrimerApellido" id="PrimerApellido" type="text" placeholder="Primer Apellido"/>
+                <label asp-for="Visitante.PrimerApellido" for="PrimerApellido">Primer Apellido</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input disabled class="form-control" asp-for="Visitante.NombreEmpresa" id="NombreEmpresa" type="NombreEmpresa" placeholder="nombre@ejemplo.com" />
+                <label asp-for="Visitante.NombreEmpresa" for="NombreEmpresa">Empresa</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <select asp-for="NuevaVisita.TipoVisitaId" class="form-select" id="TipoVisita">
+                    @foreach (var tipo in tiposVisita)
+                    {
+                        <option value="@tipo.Id">@tipo.Tipo</option>
+                    }
+                </select>
+                <label asp-for=NuevaVisita.TipoVisitaId for="TipoVisita">Tipo de visita</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <select asp-for="NuevaVisita.ColorGafeteId" class="form-select" id="Gafete">
+                    @foreach (var gafete in coloresGafete)
+                    {
+                        <option value="@gafete.Id">@gafete.Color</option>
+                    }
+                </select>
+                <label asp-for=NuevaVisita.ColorGafeteId for="Gafete">Color de gafete</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="NuevaVisita.NumeroGafete" id="NumeroGafete" type="number" />
+                <label asp-for="NuevaVisita.NumeroGafete" for="NumeroGafete">N° de Gafete</label>
+            </div>
+            <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="NuevaVisita.Temperatura" id="Temperatura" type="text" />
+                <label asp-for="NuevaVisita.Temperatura" for="Temperatura">Temperatura</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Agregar</button>
+        </form>
+    </div>
+</div>

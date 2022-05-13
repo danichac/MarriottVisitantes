@@ -25,6 +25,7 @@ namespace MarriottVisitantes.Dominio.Entidades
 
         public ColorGafete ColorGafete { get; set; }
 
+        [Required]
         public int NumeroGafete { get; set; }
 
         [Required]

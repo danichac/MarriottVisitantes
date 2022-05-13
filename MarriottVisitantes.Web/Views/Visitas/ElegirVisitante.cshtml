@@ -38,9 +38,10 @@
                     <td>@visitante.SegundoApellido</td>
                     <td>@visitante.NombreEmpresa</td>
                     <td>
-                        <form>
-                            <button class="btn btn-raised-success btn-sm" type="submit">Visita</button>
-                        </form>
+                        <a class="btn btn-raised-success btn-sm"
+                            asp-controller="Visitas"
+                            asp-action="Agregar"
+                            asp-route-visitanteId="@visitante.Id">Visita</a>
                     </td>
                 </tr>
             }

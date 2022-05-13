@@ -32,7 +32,12 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
 
         public Task<Visita> BuscarPorId(int id)
         {
-            var visita = _context.Visitas.Where(v => v.Id == id)
+            var visita = _context.Visitas
+                .Include(v => v.Usuario)
+                .Include(v => v.Visitante)
+                .Include(v => v.ColorGafeteId)
+                .Include(v => v.TipoVisitaId)
+                .Where(v => v.Id == id)
                 .FirstOrDefaultAsync();
             return visita;
         }
@@ -40,6 +45,10 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
         public async Task<IList<Visita>> GetVisitasPorVisitante(int idVisitante)
         {
             var visitas = await _context.Visitas.Where(v => v.Id == idVisitante)
+                .Include(v => v.Usuario)
+                .Include(v => v.Visitante)
+                .Include(v => v.ColorGafete)
+                .Include(v => v.TipoVisita)
                 .Select(v => v)
                 .ToListAsync();
             
@@ -52,8 +61,11 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             var visitas = new VisitasPaginacionDTO();
 
             visitas.Visitas = await _context.Visitas
+                .Include(x => x.ColorGafete)
+                .Include(v => v.TipoVisita)
+                .Include(x => x.Visitante)
                 .Where(x => x.VisitaTerminada == terminada)
-                .Select(x => x).Include(x => x.ColorGafete)
+                .Select(x => x)
                 .Include(x => x.Visitante)
                 .OrderByDescending(x => x.FechaVisita).ThenByDescending(x => x.HoraEntrada)
                 .Skip((paginaActual - 1) * resultadosPorPagina)

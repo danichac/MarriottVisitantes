@@ -13,14 +13,17 @@ namespace MarriottVisitantes.Web.Controllers
     {
         private readonly IServicioVisitas _servicioVisitas;
         private readonly IServicioVisitante _servicioVisitante;
+        private readonly IServicioUsuarios _servicioUsuarios;
         private readonly ILogger<VisitasController> _logger;
 
         public VisitasController(ILogger<VisitasController> logger,
             IServicioVisitas servicioVisitas,
-            IServicioVisitante servicioVisitante)
+            IServicioVisitante servicioVisitante,
+            IServicioUsuarios servicioUsuarios)
         {
             _servicioVisitas = servicioVisitas;
             _servicioVisitante = servicioVisitante;
+            _servicioUsuarios = servicioUsuarios;
             _logger = logger;
         }
 
@@ -100,9 +103,43 @@ namespace MarriottVisitantes.Web.Controllers
             }
         }
 
-        public IActionResult Agregar()
+        public async Task<IActionResult> Agregar(int visitanteId)
         {
-            return View();
+            try
+            {
+                var visitante = await _servicioVisitante.BuscarPorId(visitanteId);
+                var usuario = await _servicioUsuarios.ObtenerUsuarioIngresadoAsync();
+
+                var viewModel = new AgregarVisitasViewModel();
+
+                viewModel.Visitante = visitante;
+                viewModel.Usuario = usuario;
+
+                return View(viewModel);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Error en Agregar");
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Agregar(AgregarVisitasViewModel model)
+        {
+            try
+            {
+                model.ActualizarVisita();
+                await _servicioVisitas.AgregarVisita(model.NuevaVisita);
+
+                return RedirectToAction("Index", "Home");
+                
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Error agregando nueva visita");
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }

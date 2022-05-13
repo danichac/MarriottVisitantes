@@ -38,6 +38,11 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             return visitante;
         }
 
+        public async Task<Visitante> BuscarPorId(int id)
+        {
+            return await _context.Visitantes.Where(v => v.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<IList<string>> ListaDeEmpresas()
         {
             return await _context.Visitantes.Select(x => x.NombreEmpresa).Distinct().ToListAsync();

@@ -21,12 +21,12 @@ namespace MarriottVisitantes.Web.Controllers
             _servicioVisitante = servicioVisitante;
         }
 
-        public async Task<IActionResult> Visitante(string cedula, string mensajeExito = "")
+        public async Task<IActionResult> Visitante(string cedula = "", string mensajeExito = "")
         {
             try
             {
                 var visitante = await _servicioVisitante.BuscarPorCedula(cedula);
-                if(visitante is null)
+                if(cedula == "0" || visitante is null)
                     visitante = new Visitante();
 
                 ViewData["Éxito"] = mensajeExito;

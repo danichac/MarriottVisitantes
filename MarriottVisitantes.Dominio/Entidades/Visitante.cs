@@ -23,7 +23,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         public string PrimerNombre { get; set; }
 
         [MaxLength(50)]
-        public string SegundoNombre { get; set; }
+        public string? SegundoNombre { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -31,7 +31,7 @@ namespace MarriottVisitantes.Dominio.Entidades
 
         [Required]
         [MaxLength(50)]
-        public string SegundoApellido { get; set; }
+        public string? SegundoApellido { get; set; }
 
         [Required]
         [MaxLength(50)]
