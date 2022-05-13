@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarriottVisitantes.Repositorio.Migrations
 {
     [DbContext(typeof(MarriottVisitantesDbContext))]
-    [Migration("20220512210255_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20220513162625_FixRelationship")]
+    partial class FixRelationship
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,13 +116,16 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.Property<int>("TipoVisitaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("VisitaTerminada")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("VisitanteId")
+                    b.Property<int>("VisitanteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("VisitanteId1")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -133,7 +136,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.HasIndex("VisitanteId");
+                    b.HasIndex("VisitanteId1");
 
                     b.ToTable("Visitas");
                 });
@@ -170,7 +173,6 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SegundoNombre")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
@@ -209,14 +211,14 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "0c04bf68-518d-409d-80e7-b35087c9b947",
+                            ConcurrencyStamp = "7612dc6b-8af6-4cc8-92f4-aab5ff757312",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "7d5e109b-01ee-4ca6-8f08-51e6deef1680",
+                            ConcurrencyStamp = "06cded73-3f6d-4b07-87c9-4faaa7b36104",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
                         });
@@ -298,7 +300,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBglGAnIH6Atj6utAtIBaGtWuwXxCYxOi0ulOPLo2U+5gSuNnYrv/rITtKn+JVQ40w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMIM8Vst6JAu7rwIyYT6/N9VoCiofk1e6DZb7i1/deW8oWSHHhgTMXZsLWZpzj9rPA==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",
@@ -442,11 +444,13 @@ namespace MarriottVisitantes.Repositorio.Migrations
 
                     b.HasOne("MarriottVisitantes.Dominio.Identidad.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.Visitante", "Visitante")
                         .WithMany("Visitas")
-                        .HasForeignKey("VisitanteId")
+                        .HasForeignKey("VisitanteId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

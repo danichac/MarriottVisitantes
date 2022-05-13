@@ -15,10 +15,14 @@ namespace MarriottVisitantes.Dominio.Entidades
         public int Id { get; set; }
 
         [Required]
-        public Visitante Visitante { get; set; }
+        public int VisitanteId {get; set;}
+
+        public virtual Visitante Visitante { get; set; }
 
         [Required]
-        public Usuario Usuario { get; set; }
+        public int UsuarioId {get; set;}
+
+        public virtual Usuario Usuario { get; set; }
 
         [Required]
         public GafeteId ColorGafeteId { get; set; }
