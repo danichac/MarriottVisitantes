@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Dominio.Entidades;
 using MarriottVisitantes.Repositorio.Interfaces;
 using MarriottVisitantes.Servicios.Interfaces;
@@ -38,6 +39,11 @@ namespace MarriottVisitantes.Servicios.Implementaciones
         public async Task<IList<string>> ListaDeEmpresas()
         {
             return await _repositorioVisitante.ListaDeEmpresas();
+        }
+
+        public async Task<VisitantesPaginacionDTO> ListaVisitantesPaginacion(int paginaActual, BusquedaVisitantesDTO busqueda)
+        {
+            return await _repositorioVisitante.ListaVisitantesPaginacion(paginaActual, busqueda);
         }
 
         public async Task<IList<string>> ObtenerTodasCedulas()

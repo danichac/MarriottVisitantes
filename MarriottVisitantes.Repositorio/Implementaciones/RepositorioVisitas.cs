@@ -35,8 +35,8 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             var visita = _context.Visitas
                 .Include(v => v.Usuario)
                 .Include(v => v.Visitante)
-                .Include(v => v.ColorGafeteId)
-                .Include(v => v.TipoVisitaId)
+                .Include(v => v.ColorGafete)
+                .Include(v => v.TipoVisita)
                 .Where(v => v.Id == id)
                 .FirstOrDefaultAsync();
             return visita;
@@ -64,6 +64,7 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
                 .Include(x => x.ColorGafete)
                 .Include(v => v.TipoVisita)
                 .Include(x => x.Visitante)
+                .Include(v => v.Usuario)
                 .Where(x => x.VisitaTerminada == terminada)
                 .Select(x => x)
                 .Include(x => x.Visitante)

@@ -49,10 +49,10 @@
                 <label asp-for="NombreEmpresa" for="NombreEmpresa">Empresa</label>
                 <span asp-validation-for="NombreEmpresa" class="text-danger"></span>
             </div>
-            <button class="btn btn-primary" type="submit">@accionSubmit</button>
+            <button class="btn btn-raised-primary" type="submit">@accionSubmit</button>
             @if (Model.Id != 0)
             {
-                <a class="btn btn-raised-success btn-sm"
+                <a class="btn btn-raised-success"
                             asp-controller="Visitas"
                             asp-action="Agregar"
                             asp-route-visitanteId="@Model.Id">Nueva visita</a>

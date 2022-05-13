@@ -18,6 +18,7 @@
             </div>*@
             <div class="form-floating mb-4 w-auto">
                 <select asp-for="Cedula" class="form-select" id="Cedula" aria-label="Cedulas activas">
+                    <option value=""></option>
                     @foreach (var cedula in Model.CedulasActivas)
                     {
                         <option value="@cedula">@cedula</option>
@@ -27,6 +28,7 @@
             </div>
             <div class="form-floating mb-4 w-auto">
                 <select asp-for="NombreEmpresa" class="form-select" id="NombreEmpresa" aria-label="Empresas">
+                    <option value=""></option>
                     @foreach (var empresa in Model.ListaEmpresas)
                     {
                         <option value="@empresa">@empresa</option>

@@ -31,10 +31,6 @@
                 <!-- Navbar items-->
                 <div class="d-flex align-items-center mx-3 me-lg-0">
                     <!-- Navbar-->
-                    <ul class="navbar-nav d-none d-lg-flex">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Overview</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" target="_blank">Documentation</a></li>
-                    </ul>
                     <!-- Navbar buttons-->
                     <div class="d-flex">
                         <!-- Messages dropdown-->
@@ -187,8 +183,8 @@
                             <div class="drawer-menu-heading">Visitas</div>
                             <!-- Drawer link (Overview)-->
                             <a class="nav-link" asp-controller="Home" asp-action="Index">
-                                <div class="nav-link-icon"><i class="material-icons">language</i></div>
-                                Overview
+                                <div class="nav-link-icon"><i class="material-icons">home</i></div>
+                                Inicio
                             </a>
                             <a class="nav-link" asp-controller="Visitas" asp-action="BuscarVisitante">
                                 <div class="nav-link-icon"><i class="material-icons">language</i></div>
@@ -209,7 +205,7 @@
                             <!-- Divider-->
                             <div class="drawer-menu-divider"></div>
                             <!-- Drawer section heading (Plugins)-->
-                            <div class="drawer-menu-heading">Plugins</div>
+                            @*<div class="drawer-menu-heading">Plugins</div>
                             <!-- Drawer link (Charts)-->
                             <a class="nav-link" href="plugins-charts.html">
                                 <div class="nav-link-icon"><i class="material-icons">bar_chart</i></div>
@@ -229,7 +225,7 @@
                             <a class="nav-link" href="plugins-date-picker.html">
                                 <div class="nav-link-icon"><i class="material-icons">date_range</i></div>
                                 Date Picker
-                            </a>
+                            </a> *@
                         </div>
                     </div>
                     <!-- Drawer footer        -->

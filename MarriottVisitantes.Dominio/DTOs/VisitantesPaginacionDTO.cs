@@ -4,10 +4,10 @@ using MarriottVisitantes.Dominio.Entidades;
 
 namespace MarriottVisitantes.Dominio.DTOs
 {
-    public class VisitasPaginacionDTO
+    public class VisitantesPaginacionDTO
     {
-        public List<Visita> Visitas {get; set;} = new List<Visita>();
-        public int IndicePagina { get; set; }
+        public List<Visitante> Visitantes {get; set;} = new List<Visitante>();
+        public int IndicePagina { get; set; } = 1;
         public int CantidadPaginas { get; set; }
     }
 }

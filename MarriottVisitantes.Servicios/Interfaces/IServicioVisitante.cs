@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Dominio.Entidades;
 
 namespace MarriottVisitantes.Servicios.Interfaces
@@ -13,5 +14,6 @@ namespace MarriottVisitantes.Servicios.Interfaces
         public Task ActualizarVisitante(Visitante visitante);
         public Task<IList<string>> ObtenerTodasCedulas();
         public Task<IList<string>> ListaDeEmpresas();
+        public Task<VisitantesPaginacionDTO> ListaVisitantesPaginacion(int paginaActual, BusquedaVisitantesDTO busqueda);
     }
 }

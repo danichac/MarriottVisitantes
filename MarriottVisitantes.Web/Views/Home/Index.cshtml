@@ -97,6 +97,8 @@
                 <th scope="col">Color Gafete</th>
                 <th scope="col">Hora entrada</th>
                 <th scope="col">Hora salida</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Empleado</th>
                 <th scope="col">Estado</th>
             </tr>
         </thead>
@@ -117,6 +119,8 @@
                     <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
                     <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
                     <td>@visita.HoraSalida?.ToString("h:mm tt")</td>
+                    <td>@visita.FechaVisita.ToString("dd/MM/yyyy")</td>
+                    <td>@visita.Usuario.GetNombreApellido()</td>
                     <td>
                         @if(visita.VisitaTerminada)
                         {

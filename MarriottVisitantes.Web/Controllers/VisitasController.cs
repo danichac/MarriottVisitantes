@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -86,15 +87,15 @@ namespace MarriottVisitantes.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> ElegirVisitante(BuscarVisitanteViewModel model)
+        public async Task<IActionResult> ElegirVisitante(BuscarVisitanteViewModel model, int paginaActual = 1)
         {
             try
             {
-                var visitantesPorEmpresa = await _servicioVisitante.VisitantesPorEmpresa(model.NombreEmpresa);
-                var elegirVisitanteViewModel = new ElegirVisitanteViewModel();
-                elegirVisitanteViewModel.Visitantes = visitantesPorEmpresa;
+                var criteriosBusqueda = new BusquedaVisitantesDTO(model.Cedula, model.NombreEmpresa);
+                model.VisitantesPaginacion =
+                    await _servicioVisitante.ListaVisitantesPaginacion(paginaActual, criteriosBusqueda);
 
-                return View(elegirVisitanteViewModel);
+                return View(model);
             }
             catch(Exception ex)
             {
@@ -130,6 +131,9 @@ namespace MarriottVisitantes.Web.Controllers
             try
             {
                 model.ActualizarVisita();
+                if(model.NuevaVisita.TipoVisitaId == Dominio.Entidades.TipoVisitaId.Entrega)
+                    model.NuevaVisita.TerminarVisita();
+
                 await _servicioVisitas.AgregarVisita(model.NuevaVisita);
 
                 return RedirectToAction("Index", "Home");

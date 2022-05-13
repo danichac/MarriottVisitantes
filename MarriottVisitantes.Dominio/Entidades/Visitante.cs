@@ -29,7 +29,6 @@ namespace MarriottVisitantes.Dominio.Entidades
         [MaxLength(50)]
         public string PrimerApellido { get; set; }
 
-        [Required]
         [MaxLength(50)]
         public string? SegundoApellido { get; set; }
 

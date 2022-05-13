@@ -1,4 +1,4 @@
-@model ElegirVisitanteViewModel
+@model BuscarVisitanteViewModel
 
 @{
     ViewData["Title"] = "Marriott Costa Rica";
@@ -9,61 +9,78 @@
     <h1 class="display-4">Visitantes</h1>
 </div>
 
-<div id="visitantes-container">
-    <table class="table table-bordered table-hover table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#Cédula</th>
-                <th scope="col">Primer Nombre</th>
-                <th scope="col">Segundo Nombre</th>
-                <th scope="col">Primer Apellido</th>
-                <th scope="col">Segundo Apellido</th>
-                <th scope="col">Empresa</th>
-                <th scope="col">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var visitante in Model.Visitantes)
-            {
+@if(Model.VisitantesPaginacion.Visitantes.Count > 0)
+{
+    <div id="visitantes-container">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
                 <tr>
-                    <th scope="row">
-                        <a class="nav-link" 
-                            asp-controller="Visitantes" 
-                            asp-action="Visitante"
-                            asp-route-cedula="@visitante.Cedula">@visitante.Cedula</a>
-                    </th>
-                    <td>@visitante.PrimerNombre</td>
-                    <td>@visitante.SegundoNombre</td>
-                    <td>@visitante.PrimerApellido</td>
-                    <td>@visitante.SegundoApellido</td>
-                    <td>@visitante.NombreEmpresa</td>
-                    <td>
-                        <a class="btn btn-raised-success btn-sm"
-                            asp-controller="Visitas"
-                            asp-action="Agregar"
-                            asp-route-visitanteId="@visitante.Id">Visita</a>
-                    </td>
+                    <th scope="col">#Cédula</th>
+                    <th scope="col">Primer Nombre</th>
+                    <th scope="col">Segundo Nombre</th>
+                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Segundo Apellido</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Acción</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var visitante in Model.VisitantesPaginacion.Visitantes)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a class="nav-link" 
+                                asp-controller="Visitantes" 
+                                asp-action="Visitante"
+                                asp-route-cedula="@visitante.Cedula">@visitante.Cedula</a>
+                        </th>
+                        <td>@visitante.PrimerNombre</td>
+                        <td>@visitante.SegundoNombre</td>
+                        <td>@visitante.PrimerApellido</td>
+                        <td>@visitante.SegundoApellido</td>
+                        <td>@visitante.NombreEmpresa</td>
+                        <td>
+                            <a class="btn btn-raised-success btn-sm"
+                                asp-controller="Visitas"
+                                asp-action="Agregar"
+                                asp-route-visitanteId="@visitante.Id">Visita</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-    @*<nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-            @foreach (var pagina in Enumerable.Range(1, Model.VisitasNoTerminadas.CantidadPaginas))
-            {
-                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-indicePagina="@pagina">@pagina</a></li>
-            }
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-        </ul>
-    </nav>*@
-</div>
+        <form asp-action="ElegirVisitante" >
+            <input type="hidden" asp-for="Cedula">
+            <input type="hidden" asp-for="NombreEmpresa">
+            <nav >
+                <ul class="pagination">
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    @foreach (var pagina in Enumerable.Range(1, Model.VisitantesPaginacion.CantidadPaginas))
+                    {   
+                        string clase = pagina == Model.VisitantesPaginacion.IndicePagina ? "page-item active" : "page-item";
+                        <li class="@clase"><button type="submit" class="page-link" asp-action="ElegirVisitante" asp-route-paginaActual="@pagina">@pagina</button></li>
+                    }
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2>La búsqueda no obtuvo resultados.</h2>
+        <a asp-controller="Visitantes" 
+                asp-action="Visitante" 
+                class="btn btn-success" type="button">Nuevo visitante</a>
+    </div>
+}
