@@ -46,7 +46,7 @@ namespace MarriottVisitantes.Dominio.Identidad
 
         [MaxLength(50)]
         [Column("segundo_nombre")]
-        public string SegundoNombre { get; set; } = "";
+        public string? SegundoNombre { get; set; } = "";
 
         [Required]
         [MaxLength(50)]
@@ -55,7 +55,7 @@ namespace MarriottVisitantes.Dominio.Identidad
 
         [MaxLength(50)]
         [Column("segundo_apellido")]
-        public string SegundoApellido { get; set; } = "";
+        public string? SegundoApellido { get; set; } = "";
 
         [NotMapped]
         public override bool EmailConfirmed { get; set; }
