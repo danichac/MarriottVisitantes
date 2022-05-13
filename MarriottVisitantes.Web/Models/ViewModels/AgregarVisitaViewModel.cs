@@ -13,8 +13,8 @@ namespace MarriottVisitantes.Web.Models.ViewModels
 
         public void ActualizarVisita()
         {
-            NuevaVisita.Usuario = Usuario;
-            NuevaVisita.Visitante = Visitante;
+            NuevaVisita.UsuarioId = Usuario.Id;
+            NuevaVisita.VisitanteId = Visitante.Id;
             NuevaVisita.FechaVisita = DateTime.Today;
             NuevaVisita.HoraEntrada = DateTime.Now;
             NuevaVisita.HoraSalida = DateTime.Today;

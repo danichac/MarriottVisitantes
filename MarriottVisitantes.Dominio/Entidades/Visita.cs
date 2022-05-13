@@ -15,7 +15,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         public int Id { get; set; }
 
         [Required]
-        public int VisitanteId {get; set;}
+        public long VisitanteId {get; set;}
 
         public virtual Visitante Visitante { get; set; }
 

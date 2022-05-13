@@ -26,6 +26,20 @@ namespace MarriottVisitantes.Repositorio
             base.OnModelCreating(modelBuilder);
 
             modelBuilder
+                .Entity<Visita>(entity =>
+                    entity.HasOne(x => x.Usuario)
+                    .WithMany(u => u.Visitas)
+                    .HasForeignKey(x => x.UsuarioId)
+                );
+
+            modelBuilder
+                .Entity<Visita>(entity =>
+                    entity.HasOne(v => v.Visitante)
+                    .WithMany(v => v.Visitas)
+                    .HasForeignKey(v => v.VisitanteId)
+                );
+
+            modelBuilder
                 .Entity<Visita>()
                 .Property(v => v.ColorGafeteId);
             modelBuilder

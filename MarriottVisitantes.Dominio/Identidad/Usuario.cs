@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MarriottVisitantes.Dominio.DTOs;
+using MarriottVisitantes.Dominio.Entidades;
 using Microsoft.AspNetCore.Identity;
 
 namespace MarriottVisitantes.Dominio.Identidad
@@ -100,6 +101,8 @@ namespace MarriottVisitantes.Dominio.Identidad
         public override bool PhoneNumberConfirmed { get; set; } 
 
         public ICollection<UsuarioRol> Roles {get; set;}
+
+        public ICollection<Visita> Visitas {get; set;}
 
         public void Actualizar(Usuario usuario)
         {
