@@ -53,6 +53,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         public void TerminarVisita()
         {
             VisitaTerminada = true;
+            HoraSalida = DateTime.Now;
         }
     }
 }

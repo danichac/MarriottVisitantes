@@ -1,0 +1,92 @@
+@model BuscarVisitasViewModel
+
+@{
+    ViewData["Title"] = "Marriott Costa Rica";
+    var returnURL = @Context.Request.Query["returnurl"];
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Visitas del día @Model.Fecha.ToString("dd/MM/yyyy")</h1>
+</div>
+
+@if(Model.VisitasPaginacion.Visitas.Count > 0)
+{
+    <div id="visitantes-container">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#Cédula</th>
+                    <th scope="col">Primer Nombre</th>
+                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Hora entrada</th>
+                    <th scope="col">Hora salida</th>
+                    <th scope="col">N° gafete</th>
+                    <th scope="col">Color gafete</th>
+                    <th scope="col">Empleado</th>
+                    <th scope="col">Temperatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var visita in Model.VisitasPaginacion.Visitas)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a class="nav-link" 
+                                asp-controller="Visitantes" 
+                                asp-action="Visitante"
+                                asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
+                        </th>
+                        <td>@visita.Visitante.PrimerNombre</td>
+                        <td>@visita.Visitante.PrimerApellido</td>
+                        <td>@visita.Visitante.NombreEmpresa</td>
+                        <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
+                        <td>@visita.HoraSalida?.ToString("h:mm tt")</td>
+                        <td>@visita.NumeroGafete</td>
+                        <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                        <td>@visita.Usuario.GetNombreApellido()</td>
+                        <td>@visita.Temperatura</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form asp-action="TablaVisitas" >
+            <input type="hidden" asp-for="Fecha">
+            <nav >
+                <ul class="pagination">
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    @foreach (var pagina in Enumerable.Range(1, Model.VisitasPaginacion.CantidadPaginas))
+                    {   
+                        string clase = pagina == Model.VisitasPaginacion.IndicePagina ? "page-item active" : "page-item";
+                        <li class="@clase"><button type="submit" class="page-link" asp-route-paginaActual="@pagina">@pagina</button></li>
+                    }
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+        </form>
+    </div>
+    <div>
+        <form asp-action="GenerarReporte">
+            <input type="hidden" asp-for="Fecha">
+            <button class="btn btn-success" type="submit">Descargar</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2>La búsqueda no obtuvo resultados.</h2>
+        <a  asp-action="Busqueda" 
+            class="btn btn-success" type="button">Volver</a>
+
+    </div>
+}

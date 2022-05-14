@@ -34,7 +34,6 @@ namespace MarriottVisitantes.Web.Controllers
             try
             {
                 var visita =  await _servicioVisitas.BuscarPorId(idVisita);
-                visita.HoraSalida = DateTime.Now;
                 visita.TerminarVisita();
                 await _servicioVisitas.ActualizarVisita(visita);
 

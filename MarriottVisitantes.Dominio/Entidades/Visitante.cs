@@ -36,5 +36,10 @@ namespace MarriottVisitantes.Dominio.Entidades
         [MaxLength(50)]
         public string NombreEmpresa { get; set; }
         public ICollection<Visita> Visitas { get; set; }
+
+        public string ObtenerNombreCompleto()
+        {
+            return $"{PrimerNombre} {PrimerApellido}";
+        }
     }
 }

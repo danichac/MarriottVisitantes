@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MarriottVisitantes.Dominio.DTOs;
@@ -25,6 +26,16 @@ namespace MarriottVisitantes.Servicios.Implementaciones
         public async Task AgregarVisita(Visita visita)
         {
             await _repositorioVisitas.AgregarVisita(visita);
+        }
+
+        public async Task<IList<Visita>> BuscarPorFecha(DateTime fecha)
+        {
+            return await _repositorioVisitas.BuscarPorFecha(fecha);
+        }
+
+        public async Task<VisitasPaginacionDTO> BuscarPorFechaPaginacion(int paginaActual, DateTime fecha)
+        {
+            return await _repositorioVisitas.BuscarPorFechaPaginacion(paginaActual, fecha);
         }
 
         public async Task<Visita> BuscarPorId(int id)

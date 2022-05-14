@@ -30,6 +30,42 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IList<Visita>> BuscarPorFecha(DateTime fecha)
+        {
+            var visitas = await _context.Visitas
+                .Include(v => v.Usuario)
+                .Include(v => v.Visitante)
+                .Include(v => v.ColorGafete)
+                .Include(v => v.TipoVisita)
+                .Where(v => v.FechaVisita.Date == fecha.Date)
+                .ToListAsync();
+            return visitas;
+        }
+
+        public async Task<VisitasPaginacionDTO> BuscarPorFechaPaginacion(int paginaActual, DateTime fecha)
+        {
+            int resultadosPorPagina = 10;
+            var visitas = new VisitasPaginacionDTO();
+            
+            visitas.Visitas = await _context.Visitas
+                .Include(x => x.ColorGafete)
+                .Include(v => v.TipoVisita)
+                .Include(x => x.Visitante)
+                .Include(v => v.Usuario)
+                .Where(v => v.FechaVisita.Date == fecha.Date)
+                .Select(x => x)
+                .Include(x => x.Visitante)
+                .OrderByDescending(x => x.HoraEntrada)
+                .Skip((paginaActual - 1) * resultadosPorPagina)
+                .Take(resultadosPorPagina).ToListAsync();
+
+            var cantidadPaginas = (double)((decimal) await _context.Visitas.CountAsync() / Convert.ToDecimal(resultadosPorPagina));
+            visitas.CantidadPaginas = (int)Math.Ceiling(cantidadPaginas);
+            visitas.IndicePagina = paginaActual;
+
+            return visitas;
+        }
+
         public Task<Visita> BuscarPorId(int id)
         {
             var visita = _context.Visitas

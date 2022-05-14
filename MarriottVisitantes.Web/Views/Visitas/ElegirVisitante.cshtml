@@ -50,7 +50,7 @@
             </tbody>
         </table>
 
-        <form asp-action="ElegirVisitante" >
+        <form asp-action="ElegirVisitante" method="get">
             <input type="hidden" asp-for="Cedula">
             <input type="hidden" asp-for="NombreEmpresa">
             <nav >
@@ -63,7 +63,7 @@
                     @foreach (var pagina in Enumerable.Range(1, Model.VisitantesPaginacion.CantidadPaginas))
                     {   
                         string clase = pagina == Model.VisitantesPaginacion.IndicePagina ? "page-item active" : "page-item";
-                        <li class="@clase"><button type="submit" class="page-link" asp-action="ElegirVisitante" asp-route-paginaActual="@pagina">@pagina</button></li>
+                        <li class="@clase"><button type="submit" class="page-link" asp-route-paginaActual="@pagina">@pagina</button></li>
                     }
                     <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
