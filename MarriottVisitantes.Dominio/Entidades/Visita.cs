@@ -38,7 +38,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         public TipoVisita TipoVisita { get; set; }
 
         [MaxLength(8)]
-        public string Temperatura { get; set; }
+        public string? Temperatura { get; set; }
 
         [Required]
         public DateTime HoraEntrada { get; set; }
