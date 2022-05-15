@@ -3,6 +3,7 @@
     ViewData["Title"] = "Marriott Costa Rica";
     var accionSubmit = Model.Id == 0 ? "Agregar" : "Actualizar";
     var mensajeExito = ViewData["Éxito"] as string;
+    var alertClase = ViewData["Alerta"] as string;
 }
 
 <div class="container-xl px-5">
@@ -13,7 +14,7 @@
     <div class="col-sm-12 col-md-8 col-lg-6">
         @if(!string.IsNullOrEmpty(mensajeExito))
         {
-            <div class="alert alert-success" role="alert">
+            <div class="alert @alertClase" role="alert">
                 @mensajeExito
             </div>
         }
