@@ -1,24 +1,20 @@
-// Litepicker
-// 
-// The date pickers in Material Admin Pro
-// are powered by the Litepicker plugin.
-// Litepicker is a lightweight, no dependencies
-// date picker that allows for date ranges
-// and other options. For more usage details
-// visit the Litepicker docs.
-// 
-// Litepicker Documentation
-// https://wakirin.github.io/Litepicker
     
 window.addEventListener('DOMContentLoaded', event => {
 
+    const fechaHidden = document.getElementById('fechaHidden');
     const litepickerSingleDate = document.getElementById('litepickerSingleDate');
     if (litepickerSingleDate) {
-        new Litepicker({
+        const picker = new Litepicker({
             element: litepickerSingleDate,
-            format: 'MMM DD, YYYY'
+            format: 'DD/MM/YYYY',
+            lang: 'es'
+        });
+
+        picker.on('selected', (date1) => {
+            fechaHidden.setAttribute('value', date1.toLocaleString('en-US', { timeZone: 'UTC' }));
         });
     }
+    
 
     const litepickerDateRange = document.getElementById('litepickerDateRange');
     if (litepickerDateRange) {

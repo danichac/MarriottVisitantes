@@ -9,10 +9,11 @@
     </div>
     <hr class="my-5">
     <div class="col-sm-12 col-md-8 col-lg-6">
-        <form asp-controller="Reportes" asp-action="TablaVisitas" method="get">
+        <form asp-controller="Reportes" asp-action="TablaVisitas" method="get" autocomplete="off">
             <div class="mb-4 w-auto">
-                <label class="form-label" asp-for=Fecha for="litepickerSingleDate">Fecha:</label>
-                <input class="form-control" asp-for="Fecha" id="litepickerSingleDate" placeholder="Seleccionar fecha...">
+                <label class="form-label" for="litepickerSingleDate">Fecha:</label>
+                <input class="form-control" id="litepickerSingleDate" placeholder="Seleccionar fecha...">
+                <input id="fechaHidden" type="hidden" asp-for="Fecha">
             </div>
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>

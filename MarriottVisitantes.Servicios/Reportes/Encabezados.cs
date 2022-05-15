@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace MarriottVisitantes.Web.Reportes
+namespace MarriottVisitantes.Servicios.Reportes
 {
     public enum Encabezados
     {

@@ -18,6 +18,7 @@ using MarriottVisitantes.Repositorio.Implementaciones;
 using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Servicios.Implementaciones;
 using MarriottVisitantes.Dominio.Identidad;
+using MarriottVisitantes.Servicios.Reportes;
 
 namespace MarriottVisitantes.Web
 {
@@ -53,6 +54,7 @@ namespace MarriottVisitantes.Web
             services.AddScoped<IServicioUsuarios, ServicioUsuarios>();
             services.AddScoped<IServicioVisitas, ServicioVisitas>();
             services.AddScoped<IServicioVisitante, ServicioVisitante>();
+            services.AddScoped<IGeneradorReporte, GeneradorReporte>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

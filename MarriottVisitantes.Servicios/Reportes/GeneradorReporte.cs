@@ -4,10 +4,11 @@ using System.Linq;
 using ClosedXML.Excel;
 using MarriottVisitantes.Dominio.Entidades;
 using MarriottVisitantes.Dominio.Extensiones;
+using MarriottVisitantes.Servicios.Interfaces;
 
-namespace MarriottVisitantes.Web.Reportes
+namespace MarriottVisitantes.Servicios.Reportes
 {
-    public class GeneradorReporte
+    public class GeneradorReporte : IGeneradorReporte
     {
         public XLWorkbook GenerarReporte(IList<Visita> visitas, DateTime fechaVisitas)
         {

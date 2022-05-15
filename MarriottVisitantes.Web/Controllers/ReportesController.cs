@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Web.Models.ViewModels;
-using MarriottVisitantes.Web.Reportes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,18 +14,15 @@ namespace MarriottVisitantes.Web.Controllers
     public class ReportesController : Controller
     {
         private readonly IServicioVisitas _servicioVisitas;
-        private readonly IServicioVisitante _servicioVisitante;
-        private readonly IServicioUsuarios _servicioUsuarios;
         private readonly ILogger<ReportesController> _logger;
+        private readonly IGeneradorReporte _generadorReporte;
 
         public ReportesController(ILogger<ReportesController> logger,
             IServicioVisitas servicioVisitas,
-            IServicioVisitante servicioVisitante,
-            IServicioUsuarios servicioUsuarios)
+            IGeneradorReporte generadorReporte)
         {
             _servicioVisitas = servicioVisitas;
-            _servicioVisitante = servicioVisitante;
-            _servicioUsuarios = servicioUsuarios;
+            _generadorReporte = generadorReporte;
             _logger = logger;
         }
         
@@ -43,7 +39,6 @@ namespace MarriottVisitantes.Web.Controllers
             }
             
         }
-
 
         public async Task<IActionResult> TablaVisitas(BuscarVisitasViewModel model, int paginaActual = 1)
         {
@@ -63,9 +58,8 @@ namespace MarriottVisitantes.Web.Controllers
 
         public async Task<FileResult> GenerarReporte(BuscarVisitasViewModel model)
         {
-            var generadorReporte = new GeneradorReporte();
             var visitas = await _servicioVisitas.BuscarPorFecha(model.Fecha);
-            var reporte = generadorReporte.GenerarReporte(visitas, model.Fecha);
+            var reporte = _generadorReporte.GenerarReporte(visitas, model.Fecha);
 
             using(var stream = new MemoryStream())
             {

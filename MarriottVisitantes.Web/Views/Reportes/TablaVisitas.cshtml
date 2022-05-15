@@ -15,7 +15,7 @@
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#Cédula</th>
+                    <th scope="col">#Identificación</th>
                     <th scope="col">Primer Nombre</th>
                     <th scope="col">Primer Apellido</th>
                     <th scope="col">Empresa</th>
@@ -75,7 +75,7 @@
         </form>
     </div>
     <div>
-        <form asp-action="GenerarReporte">
+        <form asp-action="GenerarReporte" method="get">
             <input type="hidden" asp-for="Fecha">
             <button class="btn btn-success" type="submit">Descargar</button>
         </form>
