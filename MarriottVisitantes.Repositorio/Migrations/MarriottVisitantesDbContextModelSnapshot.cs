@@ -91,7 +91,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ColorGafeteId")
+                    b.Property<int?>("ColorGafeteId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaVisita")
@@ -103,12 +103,8 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.Property<DateTime?>("HoraSalida")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumeroGafete")
+                    b.Property<int?>("NumeroGafete")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Temperatura")
-                        .HasMaxLength(8)
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("TipoVisitaId")
                         .HasColumnType("INTEGER");
@@ -204,14 +200,14 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "19edaa13-6666-42c8-865f-b1b6bde4f45c",
+                            ConcurrencyStamp = "d1bfcfda-447a-495d-a7db-2ba9a86066aa",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "e1a0e3c4-8b9f-46a3-9af0-95ec3c2dc352",
+                            ConcurrencyStamp = "48566ad0-35a6-46f3-ba32-4327c2de13aa",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
                         });
@@ -291,7 +287,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHfgs7q9vvLfDwkyyTSNl6FIy0YnCrSRE16u5eJDv9LY0ISPzmB10zauO9OmHZ+iFQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHgNPEdr9C4Wz6S5CkhLHAbcV32Q+fiHWZDgmB6CAICa9AxCESEBwc5n6J1/EfPWcQ==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",
@@ -423,9 +419,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 {
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.ColorGafete", "ColorGafete")
                         .WithMany()
-                        .HasForeignKey("ColorGafeteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ColorGafeteId");
 
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.TipoVisita", "TipoVisita")
                         .WithMany()

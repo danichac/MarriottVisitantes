@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarriottVisitantes.Repositorio.Migrations
 {
     [DbContext(typeof(MarriottVisitantesDbContext))]
-    [Migration("20220513164855_FixVisitanteId")]
-    partial class FixVisitanteId
+    [Migration("20220527144539_MigracionInicial")]
+    partial class MigracionInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,7 +93,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ColorGafeteId")
+                    b.Property<int?>("ColorGafeteId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaVisita")
@@ -105,13 +105,8 @@ namespace MarriottVisitantes.Repositorio.Migrations
                     b.Property<DateTime?>("HoraSalida")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumeroGafete")
+                    b.Property<int?>("NumeroGafete")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Temperatura")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("TipoVisitaId")
                         .HasColumnType("INTEGER");
@@ -165,7 +160,6 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SegundoApellido")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
@@ -208,14 +202,14 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "7a2f4b4f-88bb-442a-97e8-b2ebfcb36211",
+                            ConcurrencyStamp = "d1bfcfda-447a-495d-a7db-2ba9a86066aa",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "7c50163b-ccb9-4607-944c-4fb3d3bd09a1",
+                            ConcurrencyStamp = "48566ad0-35a6-46f3-ba32-4327c2de13aa",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
                         });
@@ -262,13 +256,11 @@ namespace MarriottVisitantes.Repositorio.Migrations
                         .HasColumnName("primer_nombre");
 
                     b.Property<string>("SegundoApellido")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
                         .HasColumnName("segundo_apellido");
 
                     b.Property<string>("SegundoNombre")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
                         .HasColumnName("segundo_nombre");
@@ -297,7 +289,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                             Email = "dfchacon@uned.cr",
                             NormalizedEmail = "DFCHACON@UNED.CR",
                             NormalizedUserName = "DANICHAC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMfkdQzg6j79Ov+vjIMQTK4GNhkRKBYhEp6zOASWPMZmtvjlgc0n8+Ijme9TEPC/sA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHgNPEdr9C4Wz6S5CkhLHAbcV32Q+fiHWZDgmB6CAICa9AxCESEBwc5n6J1/EfPWcQ==",
                             PrimerApellido = "Chacón",
                             PrimerNombre = "Daniel",
                             SegundoApellido = "Navarro",
@@ -429,9 +421,7 @@ namespace MarriottVisitantes.Repositorio.Migrations
                 {
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.ColorGafete", "ColorGafete")
                         .WithMany()
-                        .HasForeignKey("ColorGafeteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ColorGafeteId");
 
                     b.HasOne("MarriottVisitantes.Dominio.Entidades.TipoVisita", "TipoVisita")
                         .WithMany()

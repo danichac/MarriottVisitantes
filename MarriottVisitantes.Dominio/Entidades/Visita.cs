@@ -24,13 +24,13 @@ namespace MarriottVisitantes.Dominio.Entidades
 
         public virtual Usuario Usuario { get; set; }
 
-        [Required]
-        public GafeteId ColorGafeteId { get; set; }
+        
+        public GafeteId? ColorGafeteId { get; set; }
 
-        public ColorGafete ColorGafete { get; set; }
+        public ColorGafete? ColorGafete { get; set; }
 
-        [Required]
-        public int NumeroGafete { get; set; }
+        
+        public int? NumeroGafete { get; set; }
 
         [Required]
         public TipoVisitaId TipoVisitaId { get; set; }
