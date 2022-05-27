@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MarriottVisitantes.Dominio.DTOs;
@@ -12,5 +13,7 @@ namespace MarriottVisitantes.Servicios.Interfaces
         public Task AgregarVisita(Visita visita);
         public Task<Visita> BuscarPorId(int id);
         public Task<IList<Visita>> GetVisitasPorVisitante(int idVisitante); 
+        public Task<IList<Visita>> BuscarPorFecha(DateTime fecha);
+        public Task<VisitasPaginacionDTO> BuscarPorFechaPaginacion(int paginaActual, DateTime fecha);
     }
 }

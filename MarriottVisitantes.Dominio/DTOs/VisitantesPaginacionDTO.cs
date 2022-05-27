@@ -9,5 +9,6 @@ namespace MarriottVisitantes.Dominio.DTOs
         public List<Visitante> Visitantes {get; set;} = new List<Visitante>();
         public int IndicePagina { get; set; } = 1;
         public int CantidadPaginas { get; set; }
+        public int TotalResultados { get; set; }
     }
 }

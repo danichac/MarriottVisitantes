@@ -21,7 +21,7 @@ namespace MarriottVisitantes.Web.Controllers
             _servicioVisitante = servicioVisitante;
         }
 
-        public async Task<IActionResult> Visitante(string cedula = "", string mensajeExito = "")
+        public async Task<IActionResult> Visitante(string cedula = "", string mensajeExito = "", string alert = "")
         {
             try
             {
@@ -30,6 +30,7 @@ namespace MarriottVisitantes.Web.Controllers
                     visitante = new Visitante();
 
                 ViewData["Éxito"] = mensajeExito;
+                ViewData["Alerta"] = alert;
                 return View(visitante);
             }
             catch(Exception ex)
@@ -44,19 +45,39 @@ namespace MarriottVisitantes.Web.Controllers
         {
             try
             {
-                var mensajeExito = string.Empty;
-                if(visitante.Id != 0)
+                if(ModelState.IsValid)
                 {
-                    await _servicioVisitante.ActualizarVisitante(visitante);
-                    mensajeExito = $"Visitante con identificación {visitante.Cedula} actualizado.";
+                    var mensajeExito = string.Empty;
+                    var alertClase = string.Empty;
+                    if(visitante.Id != 0)
+                    {   
+                        await _servicioVisitante.ActualizarVisitante(visitante);
+                        mensajeExito = $"Visitante con identificación {visitante.Cedula} actualizado.";
+                        alertClase = "alert-success";
+                    }
+                    else
+                    {
+                        var visitanteExistente = await _servicioVisitante.BuscarPorCedula(visitante.Cedula);
+                        if(visitanteExistente is not null)
+                        {
+                            mensajeExito = $"Visitante con identificación {visitante.Cedula} ya existe.";
+                            alertClase = "alert-warning";
+                        }
+                        else
+                        {
+                            await _servicioVisitante.AgregarVisitante(visitante);
+                            mensajeExito = $"Visitante con identificación {visitante.Cedula} agregado.";
+                            alertClase = "alert-success";
+                        }
+                        
+                    }
+
+                    return RedirectToAction("Visitante", "Visitantes", new {@cedula = visitante.Cedula, @mensajeExito = mensajeExito, @alert= alertClase});
                 }
                 else
                 {
-                    await _servicioVisitante.AgregarVisitante(visitante);
-                    mensajeExito = $"Visitante con identificación {visitante.Cedula} agregado.";
+                    return View(visitante);
                 }
-
-                return RedirectToAction("Visitante", "Visitantes", new {@cedula = visitante.Cedula, @mensajeExito = mensajeExito});
 
             }
             catch(Exception ex)

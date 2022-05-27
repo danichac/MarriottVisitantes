@@ -62,7 +62,11 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
                 .Skip((paginaActual - 1) * resultadosPorPagina)
                 .Take(resultadosPorPagina).ToListAsync();
 
-            var cantidadPaginas = (double)((decimal) await _context.Visitantes.CountAsync() / Convert.ToDecimal(resultadosPorPagina));
+            var totalVisitantes = await _context.Visitantes
+                .Where(v => v.Cedula == busqueda.Cedula || v.NombreEmpresa == busqueda.Empresa).CountAsync();
+            var cantidadPaginas = (double)((decimal) totalVisitantes / Convert.ToDecimal(resultadosPorPagina));
+
+            visitas.TotalResultados = totalVisitantes;
             visitas.CantidadPaginas = (int)Math.Ceiling(cantidadPaginas);
             visitas.IndicePagina = paginaActual;
 

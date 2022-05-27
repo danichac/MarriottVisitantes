@@ -1,4 +1,4 @@
-@model BuscarVisitanteViewModel
+@model BuscarVisitasViewModel
 
 @{
     ViewData["Title"] = "Marriott Costa Rica";
@@ -6,10 +6,10 @@
 }
 
 <div class="text-center mb-4">
-    <h1 class="display-4">Visitantes</h1>
+    <h1 class="display-4">Visitas del día @Model.Fecha.ToString("dd/MM/yyyy")</h1>
 </div>
 
-@if(Model.VisitantesPaginacion.Visitantes.Count > 0)
+@if(Model.VisitasPaginacion.Visitas.Count > 0)
 {
     <div id="visitantes-container">
         <table class="table table-bordered table-hover table-striped">
@@ -17,42 +17,40 @@
                 <tr>
                     <th scope="col">#Identificación</th>
                     <th scope="col">Primer Nombre</th>
-                    <th scope="col">Segundo Nombre</th>
                     <th scope="col">Primer Apellido</th>
-                    <th scope="col">Segundo Apellido</th>
                     <th scope="col">Empresa</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Hora entrada</th>
+                    <th scope="col">Hora salida</th>
+                    <th scope="col">N° gafete</th>
+                    <th scope="col">Color gafete</th>
+                    <th scope="col">Empleado</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var visitante in Model.VisitantesPaginacion.Visitantes)
+                @foreach (var visita in Model.VisitasPaginacion.Visitas)
                 {
                     <tr>
                         <th scope="row">
                             <a class="nav-link" 
                                 asp-controller="Visitantes" 
                                 asp-action="Visitante"
-                                asp-route-cedula="@visitante.Cedula">@visitante.Cedula</a>
+                                asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
                         </th>
-                        <td>@visitante.PrimerNombre</td>
-                        <td>@visitante.SegundoNombre</td>
-                        <td>@visitante.PrimerApellido</td>
-                        <td>@visitante.SegundoApellido</td>
-                        <td>@visitante.NombreEmpresa</td>
-                        <td>
-                            <a class="btn btn-raised-success btn-sm"
-                                asp-controller="Visitas"
-                                asp-action="Agregar"
-                                asp-route-visitanteId="@visitante.Id">Visita</a>
-                        </td>
+                        <td>@visita.Visitante.PrimerNombre</td>
+                        <td>@visita.Visitante.PrimerApellido</td>
+                        <td>@visita.Visitante.NombreEmpresa</td>
+                        <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
+                        <td>@visita.HoraSalida?.ToString("h:mm tt")</td>
+                        <td>@visita.NumeroGafete</td>
+                        <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                        <td>@visita.Usuario.GetNombreApellido()</td>
                     </tr>
                 }
             </tbody>
         </table>
 
-        <form asp-action="ElegirVisitante" method="get">
-            <input type="hidden" asp-for="Cedula">
-            <input type="hidden" asp-for="NombreEmpresa">
+        <form asp-action="TablaVisitas" >
+            <input type="hidden" asp-for="Fecha">
             <nav >
                 <ul class="pagination">
                     <li class="page-item">
@@ -60,9 +58,9 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                     </li>
-                    @foreach (var pagina in Enumerable.Range(1, Model.VisitantesPaginacion.CantidadPaginas))
+                    @foreach (var pagina in Enumerable.Range(1, Model.VisitasPaginacion.CantidadPaginas))
                     {   
-                        string clase = pagina == Model.VisitantesPaginacion.IndicePagina ? "page-item active" : "page-item";
+                        string clase = pagina == Model.VisitasPaginacion.IndicePagina ? "page-item active" : "page-item";
                         <li class="@clase"><button type="submit" class="page-link" asp-route-paginaActual="@pagina">@pagina</button></li>
                     }
                     <li class="page-item">
@@ -74,13 +72,19 @@
             </nav>
         </form>
     </div>
+    <div>
+        <form asp-action="GenerarReporte" method="get">
+            <input type="hidden" asp-for="Fecha">
+            <button class="btn btn-success" type="submit">Descargar Excel</button>
+        </form>
+    </div>
 }
 else
 {
     <div class="container">
         <h2>La búsqueda no obtuvo resultados.</h2>
-        <a asp-controller="Visitantes" 
-                asp-action="Visitante" 
-                class="btn btn-success" type="button">Nuevo visitante</a>
+        <a  asp-action="Busqueda" 
+            class="btn btn-success" type="button">Volver</a>
+
     </div>
 }

@@ -1,5 +1,7 @@
 @{
     var nombreUsuario = User.Claims.Where(c => c.Type == "NombreApellido").FirstOrDefault()?.Value;
+    var controller = ViewContext.RouteData.Values["controller"].ToString();
+    var action = ViewContext.RouteData.Values["action"].ToString();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -187,7 +189,7 @@
                                 Inicio
                             </a>
                             <a class="nav-link" asp-controller="Visitas" asp-action="BuscarVisitante">
-                                <div class="nav-link-icon"><i class="material-icons">language</i></div>
+                                <div class="nav-link-icon"><i class="material-icons">directions_walk</i></div>
                                 Nueva visita
                             </a>
                             <!-- Divider-->
@@ -198,12 +200,17 @@
                             {
                                 <a class="nav-link collapsed" asp-controller="Admin"
                                     asp-action="AgregarUsuario"  aria-expanded="false">
-                                    <div class="nav-link-icon"><i class="material-icons">widgets</i></div>
+                                    <div class="nav-link-icon"><i class="material-icons">person_add</i></div>
                                     Agregar Usuario
                                 </a>
                             }
                             <!-- Divider-->
                             <div class="drawer-menu-divider"></div>
+                            <div class="drawer-menu-heading">Reportes</div>
+                            <a class="nav-link" asp-controller="Reportes" asp-action="Busqueda">
+                                <div class="nav-link-icon"><i class="material-icons">summarize</i></div>
+                                Reporte de visitas
+                            </a>
                             <!-- Drawer section heading (Plugins)-->
                             @*<div class="drawer-menu-heading">Plugins</div>
                             <!-- Drawer link (Charts)-->
@@ -274,6 +281,12 @@
         <script src="~/js/scripts.js"></script>
         <!-- Load Custom Checkbox Script-->
         <script src="~/js/widgets/checklist.js"></script>
+        @if(controller == "Reportes" && action == "Busqueda")
+        {
+            <script src="https://cdn.jsdelivr.net/npm/litepicker-polyfills-ie11/dist/index.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+            <script src="~/js/litepicker.js"></script>
+        }
         @section Scripts {  
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
         }  
