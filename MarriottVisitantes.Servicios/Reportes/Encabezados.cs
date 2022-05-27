@@ -24,8 +24,6 @@ namespace MarriottVisitantes.Servicios.Reportes
         [Description("Hora de salida|I1")]
         Salida,
         [Description("Fecha|J1")]
-        Fecha,
-        [Description("Temperatura|K1")]
-        Temperatura
+        Fecha
     }
 }

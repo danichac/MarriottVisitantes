@@ -42,7 +42,6 @@ namespace MarriottVisitantes.Servicios.Reportes
                 sheet.Cell($"H{fila}").Value = string.Format("{0:t}",visita.HoraEntrada);
                 sheet.Cell($"I{fila}").Value = string.Format("{0:t}", visita.HoraSalida);
                 sheet.Cell($"J{fila}").Value = visita.FechaVisita.ToString("dd/MM/yyyy");
-                sheet.Cell($"K{fila}").Value = visita.Temperatura?.ToString();
                 fila++;
             }
 
