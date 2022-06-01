@@ -62,6 +62,5 @@ namespace MarriottVisitantes.Web.Controllers
             }
             return View(model);
         }
-
     }
 }

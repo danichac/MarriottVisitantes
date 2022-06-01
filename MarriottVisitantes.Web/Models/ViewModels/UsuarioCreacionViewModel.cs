@@ -1,10 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using MarriottVisitantes.Dominio.DTOs;
+using MarriottVisitantes.Dominio.Identidad;
 
 namespace MarriottVisitantes.Web.Models.ViewModels
 {
     public class UsuarioCreacionViewModel : UsuarioCreacionDTO
     {
+        public UsuarioCreacionViewModel()
+        {}
+
+        public UsuarioCreacionViewModel(Usuario usuario)
+        {
+            UserName = usuario.UserName;
+            PrimerNombre = usuario.PrimerNombre;
+            SegundoNombre = usuario.SegundoNombre;
+            PrimerApellido = usuario.PrimerApellido;
+            SegundoApellido = usuario.SegundoApellido;
+            Email = usuario.Email;
+        }
+
         [MaxLength(50, ErrorMessage = "Máximo 50 caracteres")]
         [Required(ErrorMessage = "El nombre de usuario es requerido")]
         public string UserName { get; set; }

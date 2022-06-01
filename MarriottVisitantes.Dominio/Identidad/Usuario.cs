@@ -26,12 +26,12 @@ namespace MarriottVisitantes.Dominio.Identidad
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El nombre de usuario es requerido")]
         [MaxLength(50)]
         [Column("nombre_usuario")]
         public override string UserName { get; set; } = "";
 
-        [Required]
+        [Required(ErrorMessage = "El correo electrónico es requerido")]
         [MaxLength(100)]
         public override string Email { get; set; } = "";
 
@@ -48,7 +48,7 @@ namespace MarriottVisitantes.Dominio.Identidad
         [Column("segundo_nombre")]
         public string? SegundoNombre { get; set; } = "";
 
-        [Required]
+        [Required(ErrorMessage = "El primer apellido es requerido")]
         [MaxLength(50)]
         [Column("primer_apellido")]
         public string PrimerApellido { get; set; } = "";

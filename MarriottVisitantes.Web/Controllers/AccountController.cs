@@ -59,5 +59,23 @@ namespace MarriottVisitantes.Web.Controllers
 
             return RedirectToAction("Login", "Account");
         }
+
+        [Authorize]
+        public async Task<IActionResult> Editar()
+        {
+            try 
+            {
+                var usuario = await _servicio.ObtenerUsuarioIngresadoAsync();
+                var model = new UsuarioCreacionViewModel(usuario);
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en editar usuario.");
+                return RedirectToAction("Error", "Home");
+            }
+            
+        }
     }
 }
