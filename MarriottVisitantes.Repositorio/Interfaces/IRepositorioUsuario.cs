@@ -18,11 +18,15 @@ namespace MarriottVisitantes.Repositorio.Interfaces
 
         public Task<IdentityResult> CrearAsync(UsuarioCreacionDTO usuario);
 
+        public Task<IdentityResult> ActualizarAsync(Usuario usuario);
+
         public ValueTask<Usuario?> ObtenerUsuarioIngresadoAsync();
 
         public Task<bool> EmailExiste(string email);
 
         public Task<bool> UserNameExiste(string userName);
+
+        bool VerificarContrasena(Usuario usuario, string contrasena);
 
         public Task AgregarARol(Usuario usuario, string rol);
 

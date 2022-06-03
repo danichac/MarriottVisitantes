@@ -51,6 +51,11 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             return await _signInManager.UserManager.CreateAsync(nuevoUsuario);
         }
 
+        public async Task<IdentityResult> ActualizarAsync(Usuario usuario)
+        {
+            return await _signInManager.UserManager.UpdateAsync(usuario);
+        }
+
         public async ValueTask<Usuario?> ObtenerUsuarioIngresadoAsync()
         {
             ClaimsPrincipal? usuario = _httpContextAccessor.HttpContext?.User;
@@ -73,7 +78,7 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             {
                 return null;
             }
-            return new Usuario(usuarioApp.Id, usuarioApp.UserName, usuarioApp.Email);
+            return usuarioApp;
         }
 
         public async Task<bool> IngresarAsync(string email, string password, bool recordarme)
@@ -106,6 +111,13 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
         public async Task AgregarARol(Usuario usuario, string rol)
         {
             await _gestorUsuarios.AddToRoleAsync(usuario, rol);
+        }
+
+        public bool VerificarContrasena(Usuario usuario, string contrasena)
+        {
+            var resultado = _gestorUsuarios.PasswordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, contrasena);
+            var exito = resultado == PasswordVerificationResult.Success;
+            return exito; 
         }
     }
 }

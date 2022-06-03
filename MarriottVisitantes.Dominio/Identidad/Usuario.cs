@@ -108,6 +108,10 @@ namespace MarriottVisitantes.Dominio.Identidad
         {
             UserName = usuario.UserName;
             PasswordHash = usuario.PasswordHash;
+            PrimerNombre = usuario.PrimerNombre;
+            SegundoNombre = usuario.SegundoNombre;
+            PrimerApellido = usuario.PrimerApellido;
+            SegundoApellido = usuario.SegundoApellido;
             Email = usuario.Email;
         }
 

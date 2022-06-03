@@ -1,6 +1,7 @@
-@model UsuarioCreacionViewModel
+@model UsuarioEdicionViewModel
 @{
     ViewData["Title"] = "Marriott Costa Rica";
+    var mensajeExito = ViewData["Éxito"] as string;
 }
 <div class="container-xl px-5">
     <div class="d-flex mt-10 mb-4 align-items-center">
@@ -9,6 +10,12 @@
     </div>
     <hr class="my-5">
     <div class="col-sm-12 col-md-8 col-lg-6">
+        @if(!string.IsNullOrEmpty(mensajeExito))
+        {
+            <div class="alert alert-success" role="alert">
+                @mensajeExito
+            </div>
+        }
         <form asp-controller="Account" asp-action="Editar" method="post">
             <div class="form-floating mb-4 w-auto">
                 <input class="form-control" asp-for="UserName" id="NombreUsuario" type="text" placeholder="Nombre de usuario"/>
@@ -41,16 +48,20 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-4 w-auto">
+                <input class="form-control" asp-for="PasswordOld" id="PasswordOld" type="password" placeholder="Contraseña"/>
+                <label asp-for="PasswordOld" for="PasswordOld">Contraseña anterior</label>
+                <span asp-validation-for="PasswordOld" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 w-auto">
                 <input class="form-control" asp-for="Password" id="Password" type="password" placeholder="Contraseña"/>
-                <label asp-for="Password" for="Password">Contraseña</label>
+                <label asp-for="Password" for="Password">Nueva contraseña</label>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-4 w-auto">
                 <input class="form-control" asp-for="PasswordConfirm" id="Password2" type="password" placeholder="Confirmar contraseña"/>
-                <label asp-for="PasswordConfirm" for="Password2">Confirmar contraseña</label>
+                <label asp-for="PasswordConfirm" for="Password2">Confirmar nueva contraseña</label>
                 <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Rol">
             <button class="btn btn-primary" type="submit">Actualizar</button>
         </form>
     </div>

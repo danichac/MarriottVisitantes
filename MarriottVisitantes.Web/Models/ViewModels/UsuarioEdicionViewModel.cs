@@ -1,10 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using MarriottVisitantes.Dominio.DTOs;
+using MarriottVisitantes.Dominio.Identidad;
 
 namespace MarriottVisitantes.Web.Models.ViewModels
 {
-    public class UsuarioCreacionViewModel : UsuarioCreacionDTO
+    public class UsuarioEdicionViewModel : UsuarioCreacionDTO
     {
+        public UsuarioEdicionViewModel()
+        {}
+
+        public UsuarioEdicionViewModel(Usuario usuario)
+        {
+            UserName = usuario.UserName;
+            PrimerNombre = usuario.PrimerNombre;
+            SegundoNombre = usuario.SegundoNombre;
+            PrimerApellido = usuario.PrimerApellido;
+            SegundoApellido = usuario.SegundoApellido;
+            Email = usuario.Email;
+        }
+
         [MaxLength(50, ErrorMessage = "Máximo 50 caracteres")]
         [Required(ErrorMessage = "El nombre de usuario es requerido")]
         public string UserName { get; set; }
@@ -27,11 +41,20 @@ namespace MarriottVisitantes.Web.Models.ViewModels
         [Required(ErrorMessage = "El correo electrónico es requerido")]
         [EmailAddress(ErrorMessage = "Correo con formato incorrecto")]
         public string Email { get; set; }
+
         [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
+        [Display(Name = "Contraseña anterior")]
+        public string PasswordOld { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Nueva contraseña")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "La contraseña debe coincidir.")]
         public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
     }

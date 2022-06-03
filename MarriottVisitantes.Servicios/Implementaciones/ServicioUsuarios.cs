@@ -41,6 +41,12 @@ namespace MarriottVisitantes.Servicios.Implementaciones
             return result;
         }
 
+        public async Task<IdentityResult> ActualizarAsync(Usuario usuario)
+        {
+            var result = await _repositorio.ActualizarAsync(usuario);
+            return result;
+        }
+
         public async Task<bool> EmailExiste(string email)
         {
             return await _repositorio.EmailExiste(email);
@@ -64,6 +70,11 @@ namespace MarriottVisitantes.Servicios.Implementaciones
         public async Task<bool> UserNameExiste(string userName)
         {
             return await _repositorio.UserNameExiste(userName);
+        }
+
+        public bool VerificarContrasena(Usuario usuario, string contrasena)
+        {
+            return _repositorio.VerificarContrasena(usuario, contrasena);
         }
     }
 }

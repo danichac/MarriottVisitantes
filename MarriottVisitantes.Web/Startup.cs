@@ -19,6 +19,7 @@ using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Servicios.Implementaciones;
 using MarriottVisitantes.Dominio.Identidad;
 using MarriottVisitantes.Servicios.Reportes;
+using MarriottVisitantes.Web.Errores;
 
 namespace MarriottVisitantes.Web
 {
@@ -36,7 +37,7 @@ namespace MarriottVisitantes.Web
         {
             services.AddControllersWithViews();
             services.AddDbContext<MarriottVisitantesDbContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddIdentity<Usuario, Rol>(options => 
             {
@@ -46,6 +47,7 @@ namespace MarriottVisitantes.Web
             })
                 .AddUserStore<ApplicationUserStore>()
                 .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
+                .AddErrorDescriber<MensajesError>()
                 .AddDefaultTokenProviders();
             services.AddScoped<IUserClaimsPrincipalFactory<Usuario>,MarriottUserClaimsPrincipalFactory>();
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarios>();
