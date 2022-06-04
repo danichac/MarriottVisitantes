@@ -30,5 +30,7 @@ namespace MarriottVisitantes.Repositorio.Interfaces
 
         public Task AgregarARol(Usuario usuario, string rol);
 
+        public Task<IdentityResult> ReestablecerPassword(Usuario usuario, string token, string nuevoPassword);
+
     }
 }

@@ -11,7 +11,7 @@ using MarriottVisitantes.Dominio.Identidad;
 
 namespace MarriottVisitantes.Repositorio.Identidad
 {
-    public class ApplicationUserStore: IUserPasswordStore<Usuario>, IUserRoleStore<Usuario>
+    public class ApplicationUserStore: IUserPasswordStore<Usuario>, IUserRoleStore<Usuario>, IUserEmailStore<Usuario>
     {
         private readonly ILogger<ApplicationUserStore> logger;
         private readonly MarriottVisitantesDbContext context;
@@ -62,7 +62,13 @@ namespace MarriottVisitantes.Repositorio.Identidad
         }
 
         public void Dispose() { }
-        
+
+        public async Task<Usuario> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+        {
+            return await context.Users
+                .FirstOrDefaultAsync(u => u.Email.ToUpper() == normalizedEmail.ToUpper());
+        }
+
         public async Task<Usuario> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
             if(int.TryParse(userId, out var id) == false)
@@ -80,6 +86,22 @@ namespace MarriottVisitantes.Repositorio.Identidad
                 .FirstOrDefaultAsync(u => u.UserName.ToUpper() == normalizedUserName,
                 cancellationToken);
         }
+
+        public async Task<string> GetEmailAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            return await context.Users.Where(u => u.Id == user.Id).Select(u => u.Email).FirstAsync();
+        }
+
+        public Task<bool> GetEmailConfirmedAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetNormalizedEmailAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> GetNormalizedUserNameAsync(Usuario usuario, CancellationToken cancellationToken)
         {
             return await Task.FromResult(usuario.NormalizedUserName);
@@ -142,6 +164,23 @@ namespace MarriottVisitantes.Repositorio.Identidad
         public Task RemoveFromRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public Task SetEmailAsync(Usuario user, string email, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetEmailConfirmedAsync(Usuario user, bool confirmed, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task SetNormalizedEmailAsync(Usuario user, string normalizedEmail, CancellationToken cancellationToken)
+        {
+            user.NormalizedEmail = normalizedEmail;
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
         }
 
         public async Task SetNormalizedUserNameAsync(Usuario usuario, string normalizedName, CancellationToken cancellationToken)

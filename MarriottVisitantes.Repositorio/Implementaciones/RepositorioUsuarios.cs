@@ -119,5 +119,10 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
             var exito = resultado == PasswordVerificationResult.Success;
             return exito; 
         }
+
+        public async Task<IdentityResult> ReestablecerPassword(Usuario usuario, string token, string nuevoPassword)
+        {
+            return await _gestorUsuarios.ResetPasswordAsync(usuario, token, nuevoPassword);
+        }
     }
 }

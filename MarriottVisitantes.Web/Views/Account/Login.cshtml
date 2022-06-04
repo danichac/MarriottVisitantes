@@ -1,95 +1,37 @@
 @model LoginViewModel
 @{
-    ViewData["Title"] = "Marriott Costa Rica";
-    Layout = null;
+    ViewData["Title"] = "Marriott Costa Rica - Ingreso";
+    Layout = "_AccountLayout";
     var returnURL = @Context.Request.Query["returnurl"]; 
     
 }
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>@ViewData["Title"] - Ingreso</title>
-        <!-- Load Favicon-->
-        <link href="~/assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <!-- Load Material Icons from Google Fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
-        <!-- Roboto and Roboto Mono fonts from Google Fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
-        <!-- Load main stylesheet-->
-        <link href="~/css/styles.css" rel="stylesheet" />
-    </head>
-    <body style="background-color: #001f3f;">
-        <!-- Layout wrapper-->
-        <div id="layoutAuthentication">
-            <!-- Layout content-->
-            <div id="layoutAuthentication_content">
-                <!-- Main page content-->
-                <main>
-                    <!-- Main content container-->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xxl-10 col-xl-10 col-lg-12">
-                                <div class="card card-raised shadow-10 mt-5 mt-xl-10 mb-4" style="margin: auto;">
-                                    <div class="row g-0">
-                                        <div class="col-lg-5 col-md-6">
-                                            <div class="card-body p-5">
-                                                <!-- Auth header with logo image-->
-                                                <div class="text-center">
-                                                    <embed class="mb-3" src="assets/MarriottLogo.svg" alt="..." style="height: 48px" />
-                                                    <h1 class="display-5 mb-0">Inicio de sesión</h1>
-                                                    <div class="subheading-1 mb-5"></div>
-                                                </div>
-                                                <!-- Login submission form-->
-                                                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@returnURL" class="mb-5" >
-                                                    <div class="form-floating input-group-lg mb-3">
-                                                        <input id="Email" asp-for="Email" type="text" class="form-control" placeholder="nombre@ejemplo.com">
-                                                        <label for="Email" asp-for="Email" class="form-label">Correo electrónico</label>      
-                                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                                    </div>
-                                                    <div class="form-floating input-group-lg mb-3">
-                                                        <input id="Password" asp-for="Password" type="password" class="form-control" placeholder="Contraseña">
-                                                        <label for="Password" asp-for="Password" class="form-label">Contraseña</label>
-                                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                                    </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="checkbox" asp-for="RememberMe">
-                                                        <label class="form-check-label" asp-for="RememberMe">
-                                                            Recuérdame
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                        <button type="submit" class="btn btn-primary">Ingresar</button>
-                                                    </div>
-                                                </form>
-                                                <!-- Auth card message-->
-                                            </div>
-                                        </div>
-                                        <!-- Background image column using inline CSS-->
-                                        <div class="col-lg-7 col-md-6 d-none d-md-block" style="background-image: url('https://d2xuzatlfjyc9k.cloudfront.net/wp-content/uploads/2015/07/San-Jose-Marriott-Hotel.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-            <!-- Layout footer-->
-            <div id="layoutAuthentication_footer"></div>
-        </div>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!-- Load Bootstrap JS bundle-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <!-- Load global scripts-->
-        <script type="module" src="~/js/material.js"></script>
-        <script src="~/js/scripts.js"></script>
-        @section Scripts {  
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
-        }  
-    </body>
-</html>
+
+<!-- Auth header with logo image-->
+<div class="text-center">
+    <img class="mb-3" src="~/assets/MarriottLogo.svg" alt="..." style="height: 48px" />
+    <h1 class="display-5 mb-0">Inicio de sesión</h1>
+    <div class="subheading-1 mb-5"></div>
+</div>
+<!-- Login submission form-->
+<form asp-controller="Account" asp-action="Login" asp-route-returnurl="@returnURL" class="mb-5" >
+    <div class="form-floating input-group-lg mb-3">
+        <input id="Email" asp-for="Email" type="text" class="form-control" placeholder="nombre@ejemplo.com">
+        <label for="Email" asp-for="Email" class="form-label">Correo electrónico</label>      
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-floating input-group-lg mb-3">
+        <input id="Password" asp-for="Password" type="password" class="form-control" placeholder="Contraseña">
+        <label for="Password" asp-for="Password" class="form-label">Contraseña</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" asp-for="RememberMe">
+        <label class="form-check-label" asp-for="RememberMe">
+            Recuérdame
+        </label>
+    </div>
+    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+        <a class="small fw-500 text-decoration-none" asp-controller="Account" asp-action="PasswordOlvidado">Olvidé mi contraseña</a>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+</form>

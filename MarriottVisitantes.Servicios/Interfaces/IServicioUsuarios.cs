@@ -29,5 +29,6 @@ namespace MarriottVisitantes.Servicios.Interfaces
         public Task AgregarARol(Usuario usuario, string rol);
         
         bool VerificarContrasena(Usuario usuario, string contrasena);
+        Task<IdentityResult> ReestablecerPassword(int id, string token, string nuevoPassword);
     }
 }

@@ -50,5 +50,11 @@ namespace MarriottVisitantes.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Exito(string mensaje)
+        {
+            var model = new SuccessViewModel() {Mensaje = mensaje};
+            return View(model);
+        }
     }
 }

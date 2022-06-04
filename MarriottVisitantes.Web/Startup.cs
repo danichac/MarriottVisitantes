@@ -57,6 +57,7 @@ namespace MarriottVisitantes.Web
             services.AddScoped<IServicioVisitas, ServicioVisitas>();
             services.AddScoped<IServicioVisitante, ServicioVisitante>();
             services.AddScoped<IGeneradorReporte, GeneradorReporte>();
+            services.AddScoped<IServicioEmail, ServicioEmail>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

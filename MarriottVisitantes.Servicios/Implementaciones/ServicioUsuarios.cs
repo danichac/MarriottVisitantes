@@ -1,5 +1,6 @@
 
 using System.Threading.Tasks;
+using System.Web;
 using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Dominio.Identidad;
 using MarriottVisitantes.Repositorio.Interfaces;
@@ -75,6 +76,14 @@ namespace MarriottVisitantes.Servicios.Implementaciones
         public bool VerificarContrasena(Usuario usuario, string contrasena)
         {
             return _repositorio.VerificarContrasena(usuario, contrasena);
+        }
+
+        public async Task<IdentityResult> ReestablecerPassword(int id, string token, string nuevoPassword)
+        {
+            var usuario = await _repositorio.BuscarPorIdAsync(id);
+            var resultado = await _repositorio.ReestablecerPassword(usuario, token, nuevoPassword);
+
+            return resultado;
         }
     }
 }
