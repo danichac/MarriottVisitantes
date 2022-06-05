@@ -148,7 +148,7 @@ namespace MarriottVisitantes.Web.Controllers
                         return RedirectToAction("Exito", "Home", new {@mensaje = mensaje});
                     }
                     else
-                        RedirectToAction("Error", "Home");
+                        ModelState.AddModelError("Email", "El correo electrónico no corresponde a ningún usuario");
                 }   
                 return View(model);
             }
