@@ -35,32 +35,39 @@ namespace MarriottVisitantes.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AgregarUsuario(UsuarioCreacionViewModel model)
         {
-            if(ModelState.IsValid)
+            try
             {
-                var emailExiste = await _servicioUsuario.EmailExiste(model.Email);
-                var userNameExiste = await _servicioUsuario.UserNameExiste(model.UserName);
-                var contrasenaCoincide = model.Password == model.PasswordConfirm;
-
-                if(userNameExiste)
-                    ModelState.AddModelError("UserName", "El nombre de usuario ingresado ya existe");
-                if(emailExiste)
-                    ModelState.AddModelError("Email", "El correo electrónico ingresado ya existe");
-                if(!contrasenaCoincide)
-                    ModelState.AddModelError("PasswordConfirm", "La contraseña no coincide");
-
-                if(!userNameExiste && !emailExiste && contrasenaCoincide)
+                if(ModelState.IsValid)
                 {
-                    var creacionResultado = await _servicioUsuario.CrearAsync(model);
-                    if(creacionResultado.Succeeded)
-                    {
-                        var usuarioCreado = await _servicioUsuario.BuscarPorEmailAsync(model.Email);
-                        await _servicioUsuario.AgregarARol(usuarioCreado, model.Rol);
+                    var emailExiste = await _servicioUsuario.EmailExiste(model.Email);
+                    var userNameExiste = await _servicioUsuario.UserNameExiste(model.UserName);
 
-                        return RedirectToAction("Index", "Home");
+                    if(userNameExiste)
+                        ModelState.AddModelError("UserName", "El nombre de usuario ingresado ya existe");
+                    if(emailExiste)
+                        ModelState.AddModelError("Email", "El correo electrónico ingresado ya existe");
+
+                    if(!userNameExiste && !emailExiste)
+                    {
+                        var creacionResultado = await _servicioUsuario.CrearAsync(model);
+                        if(creacionResultado.Succeeded)
+                        {
+                            var usuarioCreado = await _servicioUsuario.BuscarPorEmailAsync(model.Email);
+                            await _servicioUsuario.AgregarARol(usuarioCreado, model.Rol);
+                            
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                            return RedirectToAction("Error", "Home");
                     }
                 }
+                return View(model);
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en AgregarUsuario");
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }

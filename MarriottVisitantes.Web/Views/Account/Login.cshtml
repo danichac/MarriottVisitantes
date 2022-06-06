@@ -34,4 +34,7 @@
         <a class="small fw-500 text-decoration-none" asp-controller="Account" asp-action="PasswordOlvidado">Olvidé mi contraseña</a>
         <button type="submit" class="btn btn-primary">Ingresar</button>
     </div>
+    <div class="form-floating input-group-lg mt-3">
+        <span asp-validation-for="DatosError" class="text-danger"></span>
+    </div>
 </form>

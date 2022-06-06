@@ -49,7 +49,7 @@ namespace MarriottVisitantes.Web.Controllers
                         return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("Datos", "Datos de inicio de sesión incorrectos");
+                ModelState.AddModelError("DatosError", "Correo electrónico o contraseña incorrecta");
                 
                 model.Email = "";
                 model.Password = "";

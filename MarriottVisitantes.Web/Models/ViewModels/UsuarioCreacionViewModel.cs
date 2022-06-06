@@ -32,6 +32,9 @@ namespace MarriottVisitantes.Web.Models.ViewModels
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "La contraseña no coincide")]
         public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
     }

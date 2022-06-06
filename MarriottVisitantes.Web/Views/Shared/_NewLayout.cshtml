@@ -13,7 +13,7 @@
         <meta name="author" content="" />
         <title>@ViewData["Title"] - Registro de visitantes</title>
         <!-- Load Favicon-->
-        <link href="~/assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="~/assets/marriott-logo.png" rel="shortcut icon" type="image/x-icon" />
         <!-- Load Material Icons from Google Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
         <!-- Roboto and Roboto Mono fonts from Google Fonts-->
@@ -35,96 +35,7 @@
                     <!-- Navbar-->
                     <!-- Navbar buttons-->
                     <div class="d-flex">
-                        <!-- Messages dropdown-->
-                        <div class="dropdown dropdown-notifications d-none d-sm-block">
-                            <button class="btn btn-lg btn-icon dropdown-toggle me-3" id="dropdownMenuMessages" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">mail_outline</i></button>
-                            <ul class="dropdown-menu dropdown-menu-end me-3 mt-3 py-0 overflow-hidden" aria-labelledby="dropdownMenuMessages">
-                                <li><h6 class="dropdown-header bg-primary text-white fw-500 py-3">Messages</h6></li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item unread" href="#!">
-                                        <div class="dropdown-item-content">
-                                            <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Hi there, I had a question about something, is there any way you can help me out?</div></div>
-                                            <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Juan Babin</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item" href="#!">
-                                        <div class="dropdown-item-content">
-                                            <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Thanks for the assistance the other day, I wanted to follow up with you just to make sure everyting is settled.</div></div>
-                                            <div class="dropdown-item-content-subtext">Mar 10, 2021 &middot; Christine Hendersen</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item" href="#!">
-                                        <div class="dropdown-item-content">
-                                            <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Welcome to our group! It's good to see new members and I know you will do great!</div></div>
-                                            <div class="dropdown-item-content-subtext">Mar 8, 2021 &middot; Celia J. Knight</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item py-3" href="#!">
-                                        <div class="d-flex align-items-center w-100 justify-content-end text-primary">
-                                            <div class="fst-button small">View all</div>
-                                            <i class="material-icons icon-sm ms-1">chevron_right</i>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Notifications and alerts dropdown-->
-                        <div class="dropdown dropdown-notifications d-none d-sm-block">
-                            <button class="btn btn-lg btn-icon dropdown-toggle me-3" id="dropdownMenuNotifications" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">notifications</i></button>
-                            <ul class="dropdown-menu dropdown-menu-end me-3 mt-3 py-0 overflow-hidden" aria-labelledby="dropdownMenuNotifications">
-                                <li><h6 class="dropdown-header bg-primary text-white fw-500 py-3">Alerts</h6></li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item unread" href="#!">
-                                        <i class="material-icons leading-icon">assessment</i>
-                                        <div class="dropdown-item-content me-2">
-                                            <div class="dropdown-item-content-text">Your March performance report is ready to view.</div>
-                                            <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Performance</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item" href="#!">
-                                        <i class="material-icons leading-icon">check_circle</i>
-                                        <div class="dropdown-item-content me-2">
-                                            <div class="dropdown-item-content-text">Tracking codes successfully updated.</div>
-                                            <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Coverage</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item" href="#!">
-                                        <i class="material-icons leading-icon">warning</i>
-                                        <div class="dropdown-item-content me-2">
-                                            <div class="dropdown-item-content-text">Tracking codes have changed and require manual action.</div>
-                                            <div class="dropdown-item-content-subtext">Mar 8, 2021 &middot; Coverage</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider my-0" /></li>
-                                <li>
-                                    <a class="dropdown-item py-3" href="#!">
-                                        <div class="d-flex align-items-center w-100 justify-content-end text-primary">
-                                            <div class="fst-button small">View all</div>
-                                            <i class="material-icons icon-sm ms-1">chevron_right</i>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- User profile dropdown-->
+                        <!-- Dropdown del perfil de usuario -->
                         <div class="dropdown">
                             <button class="btn btn-lg btn-icon dropdown-toggle" id="dropdownMenuProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">person</i></button>
                             <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuProfile">
@@ -180,12 +91,11 @@
                                 <div class="nav-link-icon"><i class="material-icons">directions_walk</i></div>
                                 Nueva visita
                             </a>
-                            <!-- Divider-->
-                            <div class="drawer-menu-divider"></div>
-                            <!-- Drawer section heading (UI Toolkit)-->
-                            <div class="drawer-menu-heading">Usuarios</div>
+                            
                             @if (User.IsInRole(Constantes.RolAdministrador))
-                            {
+                            {   
+                                <div class="drawer-menu-divider"></div>
+                                <div class="drawer-menu-heading">Usuarios</div>
                                 <a class="nav-link collapsed" asp-controller="Admin"
                                     asp-action="AgregarUsuario"  aria-expanded="false">
                                     <div class="nav-link-icon"><i class="material-icons">person_add</i></div>
@@ -199,28 +109,6 @@
                                 <div class="nav-link-icon"><i class="material-icons">summarize</i></div>
                                 Reporte de visitas
                             </a>
-                            <!-- Drawer section heading (Plugins)-->
-                            @*<div class="drawer-menu-heading">Plugins</div>
-                            <!-- Drawer link (Charts)-->
-                            <a class="nav-link" href="plugins-charts.html">
-                                <div class="nav-link-icon"><i class="material-icons">bar_chart</i></div>
-                                Charts
-                            </a>
-                            <!-- Drawer link (Code Blocks)-->
-                            <a class="nav-link" href="plugins-code-blocks.html">
-                                <div class="nav-link-icon"><i class="material-icons">code</i></div>
-                                Code Blocks
-                            </a>
-                            <!-- Drawer link (Data Tables)-->
-                            <a class="nav-link" href="plugins-data-tables.html">
-                                <div class="nav-link-icon"><i class="material-icons">filter_alt</i></div>
-                                Data Tables
-                            </a>
-                            <!-- Drawer link (Date Picker)-->
-                            <a class="nav-link" href="plugins-date-picker.html">
-                                <div class="nav-link-icon"><i class="material-icons">date_range</i></div>
-                                Date Picker
-                            </a> *@
                         </div>
                     </div>
                     <!-- Drawer footer        -->

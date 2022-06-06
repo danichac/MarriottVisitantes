@@ -13,5 +13,6 @@ namespace MarriottVisitantes.Web.Models.ViewModels
         public string Password { get; set; }    
         [Display(Name = "Recuérdame")]
         public bool RememberMe { get; set; }
+        public string DatosError { get; set; }
     }
 }
