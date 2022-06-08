@@ -3,10 +3,15 @@
 @{
     ViewData["Title"] = "Marriott Costa Rica";
     var returnURL = @Context.Request.Query["returnurl"];
+    var fechaFormato = Model.Fecha.ToString("dd/MM/yyyy");
 }
 
 <div class="text-center mb-4">
-    <h1 class="display-4">Visitas del día @Model.Fecha.ToString("dd/MM/yyyy")</h1>
+    <h1 class="display-4">Visitas del día @fechaFormato</h1>
+    @if(Model.VisitasPaginacion.Visitas.Count > 0)
+    {
+        <h2>Total de visitas: @Model.VisitasPaginacion.TotalResultados</h2>
+    }
 </div>
 
 @if(Model.VisitasPaginacion.Visitas.Count > 0)
@@ -50,7 +55,7 @@
         </table>
 
         <form asp-action="TablaVisitas" >
-            <input type="hidden" asp-for="Fecha">
+            <input type="hidden" asp-for="Fecha" value='@fechaFormato'>
             <nav >
                 <ul class="pagination">
                     <li class="page-item">
@@ -73,10 +78,8 @@
         </form>
     </div>
     <div>
-        <form asp-action="GenerarReporte" method="get">
-            <input type="hidden" asp-for="Fecha">
-            <button class="btn btn-success" type="submit">Descargar Excel</button>
-        </form>
+        <a class="btn btn-success" asp-action="DescargarReporte" 
+            asp-route-fecha='@Model.Fecha.ToString("MM/dd/yyyy")'>Descargar Excel</a>
     </div>
 }
 else
@@ -85,6 +88,5 @@ else
         <h2>La búsqueda no obtuvo resultados.</h2>
         <a  asp-action="Busqueda" 
             class="btn btn-success" type="button">Volver</a>
-
     </div>
 }

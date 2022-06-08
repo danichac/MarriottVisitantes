@@ -56,17 +56,17 @@ namespace MarriottVisitantes.Web.Controllers
             }
         }
 
-        public async Task<FileResult> GenerarReporte(BuscarVisitasViewModel model)
+        public async Task<FileResult> DescargarReporte(DateTime fecha)
         {
-            var visitas = await _servicioVisitas.BuscarPorFecha(model.Fecha);
-            var reporte = _generadorReporte.GenerarReporte(visitas, model.Fecha);
+            var visitas = await _servicioVisitas.BuscarPorFecha(fecha);
+            var reporte = _generadorReporte.GenerarReporte(visitas, fecha);
 
             using(var stream = new MemoryStream())
             {
                 reporte.SaveAs(stream);
                 return File(stream.ToArray(),
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    $"visitas_{model.Fecha.ToString("dd/MM/yyyy")}.xlsx");
+                    $"visitas_{fecha.ToString("dd/MM/yyyy")}.xlsx");
             }
         }
     }

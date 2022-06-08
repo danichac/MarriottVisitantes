@@ -20,6 +20,7 @@ using MarriottVisitantes.Servicios.Implementaciones;
 using MarriottVisitantes.Dominio.Identidad;
 using MarriottVisitantes.Servicios.Reportes;
 using MarriottVisitantes.Web.Errores;
+using Microsoft.AspNetCore.Localization;
 
 namespace MarriottVisitantes.Web
 {
@@ -73,13 +74,19 @@ namespace MarriottVisitantes.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(AppSettings.Cultura)
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

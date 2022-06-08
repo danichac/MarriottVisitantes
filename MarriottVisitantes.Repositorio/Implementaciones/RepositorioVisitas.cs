@@ -54,7 +54,6 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
                 .Include(v => v.Usuario)
                 .Where(v => v.FechaVisita.Date == fecha.Date)
                 .Select(x => x)
-                .Include(x => x.Visitante)
                 .OrderByDescending(x => x.HoraEntrada)
                 .Skip((paginaActual - 1) * resultadosPorPagina)
                 .Take(resultadosPorPagina).ToListAsync();
@@ -111,7 +110,8 @@ namespace MarriottVisitantes.Repositorio.Implementaciones
                 .Skip((paginaActual - 1) * resultadosPorPagina)
                 .Take(resultadosPorPagina).ToListAsync();
 
-            var cantidadPaginas = (double)((decimal) await _context.Visitas.CountAsync() / Convert.ToDecimal(resultadosPorPagina));
+            var cantidadPaginas = (double)((decimal) await _context.Visitas
+                .Where(v => v.VisitaTerminada == terminada).CountAsync() / Convert.ToDecimal(resultadosPorPagina));
             visitas.CantidadPaginas = (int)Math.Ceiling(cantidadPaginas);
             visitas.IndicePagina = paginaActual;
 

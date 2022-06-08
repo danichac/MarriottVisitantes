@@ -43,6 +43,7 @@ namespace MarriottVisitantes.Dominio.Entidades
         public DateTime? HoraSalida { get; set; }
 
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime FechaVisita { get; set; }
 
         public bool VisitaTerminada { get; set; }
