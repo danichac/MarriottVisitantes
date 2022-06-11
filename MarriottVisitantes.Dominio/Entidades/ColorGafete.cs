@@ -16,6 +16,8 @@ namespace MarriottVisitantes.Dominio.Entidades
 
     public enum GafeteId
     {
+        [Description("")]
+        Nulo = 0,
         [Description("Negro")]
         Negro = 1,
         [Description("Amarillo")]

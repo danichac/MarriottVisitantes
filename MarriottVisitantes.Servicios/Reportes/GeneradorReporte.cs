@@ -38,10 +38,10 @@ namespace MarriottVisitantes.Servicios.Reportes
                 sheet.Cell($"D{fila}").Value = visita.ColorGafeteId?.ObtenerDescripcion();
                 sheet.Cell($"E{fila}").Value = visita.NumeroGafete.GetValueOrDefault(0);
                 sheet.Cell($"F{fila}").Value = visita.TipoVisitaId.ObtenerDescripcion();
-                sheet.Cell($"G{fila}").Value = visita.Usuario.GetNombreApellido();;
-                sheet.Cell($"H{fila}").Value = string.Format("{0:t}",visita.HoraEntrada);
-                sheet.Cell($"I{fila}").Value = string.Format("{0:t}", visita.HoraSalida);
-                sheet.Cell($"J{fila}").Value = visita.FechaVisita.ToString("dd/MM/yyyy");
+                sheet.Cell($"G{fila}").Value = visita.Usuario.GetNombreApellido();
+                sheet.Cell($"H{fila}").Value = visita.HoraEntrada.ToString("HH:mm:ss");
+                sheet.Cell($"I{fila}").Value = visita.HoraSalida?.ToString("HH:mm:ss");
+                sheet.Cell($"J{fila}").Value = visita.FechaVisita.Date.ToString("dd/MM/yyyy");
                 fila++;
             }
 
