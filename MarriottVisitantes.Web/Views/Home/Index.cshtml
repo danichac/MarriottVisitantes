@@ -17,7 +17,6 @@
             <tr>
                 <th scope="col">#Cédula</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
                 <th scope="col">Empresa</th>
                 <th scope="col">N° Gafete</th>
                 <th scope="col">Color Gafete</th>
@@ -36,10 +35,9 @@
                             asp-action="Visitante"
                             asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
                     </th>
-                    <td>@visita.Visitante.PrimerNombre</td>
-                    <td>@visita.Visitante.PrimerApellido</td>
+                    <td>@visita.Visitante.ObtenerNombreCompleto()</td>
                     <td>@visita.Visitante.NombreEmpresa</td>
-                    <td>@visita.NumeroGafete</td>
+                    <td>@visita.NumeroGafete.GetValueOrDefault(0)</td>
                     <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
                     <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
                     <td>
@@ -48,7 +46,7 @@
                             <span class="badge bg-success">Terminada</span>
                         } else
                         {
-                            <span class="badge bg-danger">No terminada</span>
+                            <span class="badge bg-danger">En curso</span>
                         }
                     </td>
                     <td>

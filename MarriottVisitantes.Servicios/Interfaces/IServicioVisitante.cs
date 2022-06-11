@@ -8,7 +8,7 @@ namespace MarriottVisitantes.Servicios.Interfaces
     public interface IServicioVisitante
     {
         public Task<Visitante> BuscarPorCedula(string cedula);
-        public Task<Visitante> BuscarPorId(int id);
+        public Task<Visitante> BuscarPorId(long id);
         public Task<IList<Visitante>> VisitantesPorEmpresa(string nombreEmpresa);
         public Task AgregarVisitante(Visitante visitante);
         public Task ActualizarVisitante(Visitante visitante);

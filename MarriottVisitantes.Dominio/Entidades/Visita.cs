@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using MarriottVisitantes.Dominio.Identidad;
+using MarriottVisitantes.Dominio.Validaciones;
 
 namespace MarriottVisitantes.Dominio.Entidades
 {
@@ -24,12 +25,14 @@ namespace MarriottVisitantes.Dominio.Entidades
 
         public virtual Usuario Usuario { get; set; }
 
-        
+        [RequiredIf(nameof(TipoVisitaId), TipoVisitaId.Extensa, "El color de gafete es requerido para una visita extensa")]
+        [NotRequiredIf(nameof(TipoVisitaId), TipoVisitaId.Entrega, "El color de gafete no es requerido para una entrega")]
         public GafeteId? ColorGafeteId { get; set; }
 
         public ColorGafete? ColorGafete { get; set; }
 
-        
+        [RequiredIf(nameof(TipoVisitaId), TipoVisitaId.Extensa, "El número de gafete es requerido para una visita extensa")]
+        [NotRequiredIf(nameof(TipoVisitaId), TipoVisitaId.Entrega, "El número de gafete no es requerido para una entrega")]
         public int? NumeroGafete { get; set; }
 
         [Required]

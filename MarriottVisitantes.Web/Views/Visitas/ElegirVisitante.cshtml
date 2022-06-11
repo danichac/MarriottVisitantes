@@ -50,7 +50,7 @@
             </tbody>
         </table>
 
-        <form asp-action="ElegirVisitante" method="get">
+        <div>
             <input type="hidden" asp-for="Cedula">
             <input type="hidden" asp-for="NombreEmpresa">
             <nav >
@@ -63,7 +63,9 @@
                     @foreach (var pagina in Enumerable.Range(1, Model.VisitantesPaginacion.CantidadPaginas))
                     {   
                         string clase = pagina == Model.VisitantesPaginacion.IndicePagina ? "page-item active" : "page-item";
-                        <li class="@clase"><button type="submit" class="page-link" asp-route-paginaActual="@pagina">@pagina</button></li>
+                        <li class="@clase">
+                            <a class="page-link" asp-action="ElegirVisitante" asp-route-cedula="@Model.Cedula" asp-route-empresa="@Model.NombreEmpresa" asp-route-paginaActual="@pagina">@pagina</a>
+                            </li>
                     }
                     <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
@@ -72,15 +74,18 @@
                     </li>
                 </ul>
             </nav>
-        </form>
+        </div>
     </div>
 }
 else
 {
     <div class="container">
-        <h2>La búsqueda no obtuvo resultados.</h2>
+        <h2 class="mb-4">La búsqueda no obtuvo resultados.</h2>
         <a asp-controller="Visitantes" 
-                asp-action="Visitante" 
-                class="btn btn-success" type="button">Nuevo visitante</a>
+            asp-action="Visitante" 
+            class="btn btn-success" type="button">Nuevo visitante</a>
+        <a asp-controller="Visitas" 
+            asp-action="BuscarVisitante" 
+            class="btn btn-primary" type="button">Volver</a>
     </div>
 }

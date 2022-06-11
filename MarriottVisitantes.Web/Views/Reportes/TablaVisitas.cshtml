@@ -21,11 +21,11 @@
             <thead>
                 <tr>
                     <th scope="col">#Identificación</th>
-                    <th scope="col">Primer Nombre</th>
-                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Hora entrada</th>
                     <th scope="col">Hora salida</th>
+                    <th scope="col">Tipo de visita</th>
                     <th scope="col">N° gafete</th>
                     <th scope="col">Color gafete</th>
                     <th scope="col">Empleado</th>
@@ -41,13 +41,13 @@
                                 asp-action="Visitante"
                                 asp-route-cedula="@visita.Visitante.Cedula">@visita.Visitante.Cedula</a>
                         </th>
-                        <td>@visita.Visitante.PrimerNombre</td>
-                        <td>@visita.Visitante.PrimerApellido</td>
+                        <td>@visita.Visitante.ObtenerNombreCompleto()</td>
                         <td>@visita.Visitante.NombreEmpresa</td>
                         <td>@visita.HoraEntrada.ToString("h:mm tt")</td>
                         <td>@visita.HoraSalida?.ToString("h:mm tt")</td>
-                        <td>@visita.NumeroGafete</td>
-                        <td>@visita.ColorGafete.Id.ObtenerDescripcion()</td>
+                        <td>@visita.TipoVisita?.Id.ObtenerDescripcion()</td>
+                        <td>@visita.NumeroGafete.GetValueOrDefault(0)</td>
+                        <td>@visita.ColorGafete?.Id.ObtenerDescripcion()</td>
                         <td>@visita.Usuario.GetNombreApellido()</td>
                     </tr>
                 }

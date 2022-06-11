@@ -59,16 +59,19 @@
             </div>
             <div class="form-floating mb-4 w-auto">
                 <select asp-for="NuevaVisita.ColorGafeteId" class="form-select" id="Gafete">
+                    <option value=""></option>
                     @foreach (var gafete in coloresGafete)
                     {
                         <option value="@gafete.Id">@gafete.Color</option>
                     }
                 </select>
                 <label asp-for=NuevaVisita.ColorGafeteId for="Gafete">Color de gafete</label>
+                <span asp-validation-for="NuevaVisita.ColorGafeteId" class="text-danger"></span>
             </div>
             <div class="form-floating mb-4 w-auto">
                 <input class="form-control" asp-for="NuevaVisita.NumeroGafete" id="NumeroGafete" type="number" />
                 <label asp-for="NuevaVisita.NumeroGafete" for="NumeroGafete">N° de Gafete</label>
+                <span asp-validation-for="NuevaVisita.NumeroGafete" class="text-danger"></span>
             </div>
             <button class="btn btn-primary" type="submit">Agregar</button>
         </form>

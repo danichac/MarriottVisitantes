@@ -17,7 +17,6 @@ namespace MarriottVisitantes.Web.Models.ViewModels
             NuevaVisita.VisitanteId = Visitante.Id;
             NuevaVisita.FechaVisita = DateTime.Today;
             NuevaVisita.HoraEntrada = DateTime.Now;
-            NuevaVisita.HoraSalida = DateTime.Today;
         }
     }
 }

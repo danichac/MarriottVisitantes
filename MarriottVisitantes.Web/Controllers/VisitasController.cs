@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MarriottVisitantes.Dominio.DTOs;
 using MarriottVisitantes.Servicios.Interfaces;
 using MarriottVisitantes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
 namespace MarriottVisitantes.Web.Controllers
@@ -65,32 +67,27 @@ namespace MarriottVisitantes.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuscarVisitante(BuscarVisitanteViewModel model)
+        public IActionResult BuscarVisitante(BuscarVisitanteViewModel model)
         {
             try
             {
-                var visitante = await _servicioVisitante.BuscarPorCedula(model.Cedula);
-                if (visitante is null || visitante?.Id == 0)
-                {
-                    return RedirectToAction("Visitante", "Visitantes", model.Cedula);
-                }
-                else
-                {
-                    return RedirectToAction("Agregar", "Visitas");
-                }
+                return RedirectToAction("ElegirVisitante", 
+                    new {@cedula = model.Cedula, @empresa = model.NombreEmpresa});
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Error buscando el visitante");
+                _logger.LogError(ex, "Error en ElegirVisitante");
                 return RedirectToAction("Error", "Home");
             }
         }
 
-        public async Task<IActionResult> ElegirVisitante(BuscarVisitanteViewModel model, int paginaActual = 1)
+
+        public async Task<IActionResult> ElegirVisitante(string cedula, string empresa, int paginaActual = 1)
         {
             try
             {
-                var criteriosBusqueda = new BusquedaVisitantesDTO(model.Cedula, model.NombreEmpresa);
+                var criteriosBusqueda = new BusquedaVisitantesDTO(cedula, empresa);
+                var model = new BuscarVisitanteViewModel() {Cedula = cedula, NombreEmpresa = empresa};
                 model.VisitantesPaginacion =
                     await _servicioVisitante.ListaVisitantesPaginacion(paginaActual, criteriosBusqueda);
 
@@ -129,14 +126,29 @@ namespace MarriottVisitantes.Web.Controllers
         {
             try
             {
-                model.ActualizarVisita();
-                if(model.NuevaVisita.TipoVisitaId == Dominio.Entidades.TipoVisitaId.Entrega)
-                    model.NuevaVisita.TerminarVisita();
+                var isValid = ModelState
+                    .Where( s => s.Key == "NuevaVisita.ColorGafeteId" || s.Key == "NuevaVisita.NumeroGafete")
+                    .Select(s => s.Value)
+                    .All(v => v.ValidationState == ModelValidationState.Valid);
 
-                await _servicioVisitas.AgregarVisita(model.NuevaVisita);
+                if(isValid)
+                {
+                    model.ActualizarVisita();
+                    if(model.NuevaVisita.TipoVisitaId == Dominio.Entidades.TipoVisitaId.Entrega)
+                        model.NuevaVisita.TerminarVisita();
 
-                return RedirectToAction("Index", "Home");
+                    await _servicioVisitas.AgregarVisita(model.NuevaVisita);
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                var visitante = await _servicioVisitante.BuscarPorId(model.Visitante.Id);
+                var usuario = await _servicioUsuarios.ObtenerUsuarioIngresadoAsync();
                 
+                model.Visitante = visitante;
+                model.Usuario = usuario;
+
+                return View(model);
             }
             catch(Exception ex)
             {
