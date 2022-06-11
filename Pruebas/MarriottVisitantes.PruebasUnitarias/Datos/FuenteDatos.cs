@@ -220,5 +220,93 @@ namespace MarriottVisitantes.PruebasUnitarias
                 PasswordConfirm = "gfgfgfgfgf"
             };
         }
+
+        public static Visitante VisitanteValido()
+        {
+            var visitante = new Visitante()
+            {
+                Id = 1,
+                Cedula = "1-1111-1111",
+                PrimerNombre = "Visitante",
+                PrimerApellido = "Prueba",
+                NombreEmpresa ="Empresa Prueba"
+            };
+
+            return visitante;
+        }
+
+        public static Visitante VisitanteNoValido()
+        {
+            var visitante = new Visitante()
+            {
+                Id = 1,
+                Cedula = "",
+                PrimerNombre = "Visitante",
+                PrimerApellido = "Prueba",
+                NombreEmpresa =""
+            };
+
+            return visitante;
+        }
+
+        public static Visita ObtenerVisitaEnCurso()
+        {
+            var usuario = UsuarioIdentidad();
+            var visitante = VisitanteValido();
+
+            var visita = new Visita()
+            {
+                Id = 2,
+                VisitanteId = visitante.Id,
+                Visitante = visitante,
+                UsuarioId = usuario.Id,
+                Usuario = usuario,
+                HoraEntrada = DateTime.Now.AddHours(-2),
+                TipoVisitaId = TipoVisitaId.Extensa,
+                ColorGafeteId = GafeteId.Rojo,
+                NumeroGafete = 12,
+                VisitaTerminada = false,
+                FechaVisita = DateTime.Today
+            };
+
+            return visita;
+        }
+
+        public static VisitantesPaginacionDTO ObtenerVisitantesPaginacion()
+        {
+            var resultado = new VisitantesPaginacionDTO();
+
+            var visitantes = new List<Visitante>();
+            visitantes.Add(VisitanteValido());
+            resultado.Visitantes = visitantes;
+            resultado.IndicePagina = 1;
+            resultado.TotalResultados = 1;
+            resultado.CantidadPaginas = 1;
+            return resultado;
+        }
+
+        public static AgregarVisitasViewModel ObtenerVisitaAgregar()
+        {
+            var nuevaVisita = new AgregarVisitasViewModel();
+
+            nuevaVisita.Usuario = UsuarioIdentidad();
+            nuevaVisita.Visitante = VisitanteValido();
+            nuevaVisita.NuevaVisita = new Visita()
+            {
+                Id = 2,
+                VisitanteId = nuevaVisita.Visitante.Id,
+                Visitante = nuevaVisita.Visitante,
+                UsuarioId = nuevaVisita.Usuario.Id,
+                Usuario = nuevaVisita.Usuario,
+                HoraEntrada = DateTime.Now.AddHours(-2),
+                TipoVisitaId = TipoVisitaId.Extensa,
+                ColorGafeteId = GafeteId.Rojo,
+                NumeroGafete = 12,
+                VisitaTerminada = false,
+                FechaVisita = DateTime.Today
+            };
+
+            return nuevaVisita;
+        }
     }
 }

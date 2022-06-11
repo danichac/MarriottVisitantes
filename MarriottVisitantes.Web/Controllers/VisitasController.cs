@@ -54,7 +54,6 @@ namespace MarriottVisitantes.Web.Controllers
             try
             {
                 var busquedaViewModel = new BuscarVisitanteViewModel();
-                busquedaViewModel.CedulasActivas = await _servicioVisitante.ObtenerTodasCedulas();
                 busquedaViewModel.ListaEmpresas = await _servicioVisitante.ListaDeEmpresas();
                 return View(busquedaViewModel);
             }
