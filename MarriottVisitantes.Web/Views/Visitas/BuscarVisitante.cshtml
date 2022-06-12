@@ -16,16 +16,6 @@
                 <label asp-for="Cedula" for="Cedula">Identificación</label>
                 <span asp-validation-for="Cedula" class="text-danger"></span>
             </div>
-@*             <div class="form-floating mb-4 w-auto">
-                <select asp-for="Cedula" class="form-select" id="Cedula" aria-label="Cedulas activas">
-                    <option value=""></option>
-                    @foreach (var cedula in Model.CedulasActivas)
-                    {
-                        <option value="@cedula">@cedula</option>
-                    }
-                </select>
-                <label asp-for=Cedula for="Cedula">Seleccionar identificación</label>
-            </div> *@
             <div class="form-floating mb-4 w-auto">
                 <select asp-for="NombreEmpresa" class="form-select" id="NombreEmpresa" aria-label="Empresas">
                     <option value=""></option>
@@ -36,8 +26,8 @@
                 </select>
                 <label asp-for=NombreEmpresa for="NombreEmpresa">Seleccionar empresa</label>
             </div>
-            <button class="btn btn-primary" type="submit">Buscar</button>
-            <a asp-controller="Visitantes" 
+            <button id="BuscarVisitante" class="btn btn-primary" type="submit">Buscar</button>
+            <a id="NuevoVisitante" asp-controller="Visitantes" 
                 asp-action="Visitante" 
                 class="btn btn-success" type="button">Nuevo visitante</a>
         </form>

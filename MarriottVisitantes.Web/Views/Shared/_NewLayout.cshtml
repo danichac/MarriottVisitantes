@@ -47,7 +47,7 @@
                                 </li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout" method="post">
+                                    <a id="LinkSalir" class="dropdown-item" asp-controller="Account" asp-action="Logout" method="post">
                                         <i class="material-icons leading-icon">logout</i>
                                         <div class="me-3">Salir</div>
                                     </a>
@@ -87,7 +87,7 @@
                                 <div class="nav-link-icon"><i class="material-icons">home</i></div>
                                 Inicio
                             </a>
-                            <a class="nav-link" asp-controller="Visitas" asp-action="BuscarVisitante">
+                            <a id="NuevaVisita" class="nav-link" asp-controller="Visitas" asp-action="BuscarVisitante">
                                 <div class="nav-link-icon"><i class="material-icons">directions_walk</i></div>
                                 Nueva visita
                             </a>
@@ -96,7 +96,7 @@
                             {   
                                 <div class="drawer-menu-divider"></div>
                                 <div class="drawer-menu-heading">Usuarios</div>
-                                <a class="nav-link collapsed" asp-controller="Admin"
+                                <a id="AgregarUsuario" class="nav-link collapsed" asp-controller="Admin"
                                     asp-action="AgregarUsuario"  aria-expanded="false">
                                     <div class="nav-link-icon"><i class="material-icons">person_add</i></div>
                                     Agregar Usuario
@@ -105,7 +105,7 @@
                             <!-- Divider-->
                             <div class="drawer-menu-divider"></div>
                             <div class="drawer-menu-heading">Reportes</div>
-                            <a class="nav-link" asp-controller="Reportes" asp-action="Busqueda">
+                            <a id="ReporteVisitas" class="nav-link" asp-controller="Reportes" asp-action="Busqueda">
                                 <div class="nav-link-icon"><i class="material-icons">summarize</i></div>
                                 Reporte de visitas
                             </a>

@@ -9,7 +9,7 @@
 <!-- Auth header with logo image-->
 <div class="text-center">
     <img class="mb-3" src="~/assets/marriott-logo.png" alt="..." style="height: 48px" />
-    <h1 class="display-5 mb-0">Inicio de sesión</h1>
+    <h1 id="InicioHeader" class="display-5 mb-0">Inicio de sesión</h1>
     <div class="subheading-1 mb-5"></div>
 </div>
 <!-- Login submission form-->
@@ -25,16 +25,16 @@
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" asp-for="RememberMe">
+        <input id="RememberMe" class="form-check-input" type="checkbox" asp-for="RememberMe">
         <label class="form-check-label" asp-for="RememberMe">
             Recuérdame
         </label>
     </div>
     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
         <a class="small fw-500 text-decoration-none" asp-controller="Account" asp-action="PasswordOlvidado">Olvidé mi contraseña</a>
-        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <button id="Ingresar" type="submit" class="btn btn-primary">Ingresar</button>
     </div>
     <div class="form-floating input-group-lg mt-3">
-        <span asp-validation-for="DatosError" class="text-danger"></span>
+        <span id="DatosError" asp-validation-for="DatosError" class="text-danger"></span>
     </div>
 </form>
