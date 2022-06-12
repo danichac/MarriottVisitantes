@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Marriott Costa Rica";
+    var mensajeExito = TempData["Éxito"] as string;
 }
 
 <div class="text-center mb-4">
@@ -9,10 +10,16 @@
 </div>
 
 <div id="no-terminadas-container">
+    @if(!string.IsNullOrEmpty(mensajeExito))
+        {
+            <div id="Exito" class="alert alert-success" role="alert">
+                @mensajeExito
+            </div>
+        }
     <div class="text-start mb-4">
         <h2 class="display-4">Visitas en curso</h2>
     </div>
-    <table class="table table-bordered table-hover table-striped">
+    <table id="tabla-visitas" class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
                 <th scope="col">#Cédula</th>
@@ -28,7 +35,7 @@
         <tbody>
             @foreach (var visita in Model.VisitasNoTerminadas.Visitas)
             {
-                <tr>
+                <tr class="fila-tabla">
                     <th scope="row">
                         <a class="nav-link" 
                             asp-controller="Visitantes" 
@@ -51,7 +58,7 @@
                     </td>
                     <td>
                         <form asp-controller="Visitas" asp-action="Terminar" method="post" asp-route-idVisita="@visita.Id">
-                            <button class="btn btn-raised-success btn-sm" type="submit">Terminar</button>
+                            <button class="btn btn-raised-success btn-sm boton-terminar" type="submit">Terminar</button>
                         </form>
                     </td>
                 </tr>

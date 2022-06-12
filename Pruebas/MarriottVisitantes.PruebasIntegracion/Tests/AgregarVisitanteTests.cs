@@ -1,22 +1,22 @@
 using MarriottVisitantes.PruebasIntegracion.Datos;
 using MarriottVisitantes.PruebasIntegracion.Orden;
+using MarriottVisitantes.PruebasIntegracion.Paginas;
 using Xunit;
-
 
 namespace MarriottVisitantes.PruebasIntegracion.Tests
 {
     [TestCaseOrderer("MarriottVisitantes.PruebasIntegracion.Orden.PriorityOrderer", "MarriottVisitantes.PruebasIntegracion")]
-    public class BuscarVisitanteTests : IClassFixture<MainTest>
+    public class AgregarVisitanteTests : IClassFixture<MainTest>
     {
         MainTest testFixture;
 
-        public BuscarVisitanteTests(MainTest testFixture)
+        public AgregarVisitanteTests(MainTest testFixture)
         {
             this.testFixture = testFixture;
         }
 
         [Fact, TestPriority(1)]
-        public void A_Buscar_Con_Cedula_y_Empresa_Inexistentes_No_Resultados()
+        public void Agregar_Visitante_Sin_Cedula_Error()
         {
             var paginaLogin = testFixture.IrLogin();
             var paginaInicio = testFixture.Login(paginaLogin);
@@ -25,39 +25,33 @@ namespace MarriottVisitantes.PruebasIntegracion.Tests
             paginaBuscar.IngresarCedula(FuenteDatos.CedulaNoExiste);
             var paginaElegir = paginaBuscar.ClickBuscarVisitante();
 
-            var sinResultados = paginaElegir.MensajeSinResultados();
+            var paginaAgregar = paginaElegir.ClickBotonNuevoVisitante();
 
-            Assert.Equal("La búsqueda no obtuvo resultados.", sinResultados);
+            paginaAgregar.IngresarDato(DatosEnum.Cedula, "");
+            paginaAgregar.ClickAgregarVisitante();
+            var mensajeError = paginaAgregar.ObtenerErrorCedula();
+
+            Assert.Equal("La identificación es requerida", mensajeError);
         }
 
         [Fact, TestPriority(2)]
-        public void B_Buscar_Cedula_Existente_ProduceResultados()
+        public void Actualizar_Visitante_Con_Datos_Validos_Exito()
         {
             var paginaInicio = testFixture.IrInicio();
             var paginaBuscar = paginaInicio.ClickNuevaVisita();
-        
+            
             paginaBuscar.IngresarCedula(FuenteDatos.CedulaExiste);
             var paginaElegir = paginaBuscar.ClickBuscarVisitante();
-        
-            var cantidadResultados = paginaElegir.GetCantidadFilasTabla();
+            var paginaVisitante = paginaElegir.ClickCedula();
+            
+            paginaVisitante.IngresarDato(DatosEnum.SegundoNombre, "Esteban");
+            paginaVisitante.ClickAgregarVisitante();
 
-            Assert.Equal(1, cantidadResultados);
-        }
+            var mensajeExito = paginaVisitante.ObtenerExitoVisitante();
+            var mensajeEsperado = $"Visitante con identificación {FuenteDatos.CedulaExiste} actualizado.";
 
-        [Fact, TestPriority(3)]
-        public void C_Buscar_Empresa_Existente_ProduceResultados()
-        {
-            var paginaInicio = testFixture.IrInicio();
-            var paginaBuscar = paginaInicio.ClickNuevaVisita();
-        
-            paginaBuscar.SeleccionarEmpresa(FuenteDatos.EmpresaExiste);
-            var paginaElegir = paginaBuscar.ClickBuscarVisitante();
-        
-            var cantidadResultados = paginaElegir.GetCantidadFilasTabla();
-
-            Assert.Equal(3, cantidadResultados);
+            Assert.Equal(mensajeEsperado, mensajeExito);
             testFixture.Salir();
         }
-
     }
 }

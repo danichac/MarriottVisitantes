@@ -50,6 +50,7 @@ namespace MarriottVisitantes.Repositorio
                 .HasData(
                     Enum.GetValues(typeof(GafeteId))
                         .Cast<GafeteId>()
+                        .Skip(1)
                         .Select(g => new ColorGafete()
                             {
                                 Id = g,
@@ -79,17 +80,29 @@ namespace MarriottVisitantes.Repositorio
             {
                 Id = 1,
                 UserName = "danichac",
-                PasswordHash = "Welcome123",
+                PasswordHash = "Welcome123$",
                 PrimerNombre = "Daniel",
                 PrimerApellido = "Chacón",
                 SegundoApellido = "Navarro",
                 Email = "dfchacon@uned.cr"
             };
 
+            var kattia = new Usuario
+            {
+                Id = 2,
+                UserName = "kalvarez",
+                PasswordHash = "Welcome123$",
+                PrimerNombre = "Kattia",
+                PrimerApellido = "Álvarez",
+                Email = "kattia.alvarez@marriotthotels.com"
+            };
+
             daniel.PasswordHash = new PasswordHasher<Usuario>().HashPassword(daniel, daniel.PasswordHash);
+            kattia.PasswordHash = new PasswordHasher<Usuario>().HashPassword(kattia, kattia.PasswordHash);
             modelBuilder.Entity<Usuario>(usuario =>
             {
                 usuario.HasData(daniel);
+                usuario.HasData(kattia);
             });
 
             var rolAdministrador = new Rol
@@ -125,10 +138,16 @@ namespace MarriottVisitantes.Repositorio
                 UserId = 1,
                 RoleId = 1,
             };
+            var usuarioRol2 = new UsuarioRol
+            {
+                UserId = 2,
+                RoleId = 1
+            };
 
             modelBuilder.Entity<UsuarioRol>(ur =>
             {
                 ur.HasData(usuarioRol);
+                ur.HasData(usuarioRol2);
             });
         }
     }

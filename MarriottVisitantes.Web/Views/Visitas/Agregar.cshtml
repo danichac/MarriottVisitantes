@@ -25,7 +25,7 @@
     <div class="col-sm-12 col-md-8 col-lg-6">
         @if(!string.IsNullOrEmpty(mensajeExito))
         {
-            <div class="alert alert-success" role="alert">
+            <div id="Exito" class="alert alert-success" role="alert">
                 @mensajeExito
             </div>
         }
@@ -66,14 +66,14 @@
                     }
                 </select>
                 <label asp-for=NuevaVisita.ColorGafeteId for="Gafete">Color de gafete</label>
-                <span asp-validation-for="NuevaVisita.ColorGafeteId" class="text-danger"></span>
+                <span id="validacion-color" asp-validation-for="NuevaVisita.ColorGafeteId" class="text-danger"></span>
             </div>
             <div class="form-floating mb-4 w-auto">
                 <input class="form-control" asp-for="NuevaVisita.NumeroGafete" id="NumeroGafete" type="number" />
                 <label asp-for="NuevaVisita.NumeroGafete" for="NumeroGafete">N° de Gafete</label>
-                <span asp-validation-for="NuevaVisita.NumeroGafete" class="text-danger"></span>
+                <span id="validacion-numero" asp-validation-for="NuevaVisita.NumeroGafete" class="text-danger"></span>
             </div>
-            <button class="btn btn-primary" type="submit">Agregar</button>
+            <button id="agregar-nueva-visita" class="btn btn-primary" type="submit">Agregar</button>
         </form>
     </div>
 </div>

@@ -38,7 +38,7 @@ namespace MarriottVisitantes.Web.Controllers
                 var visita =  await _servicioVisitas.BuscarPorId(idVisita);
                 visita.TerminarVisita();
                 await _servicioVisitas.ActualizarVisita(visita);
-
+                TempData["Éxito"] = $"Visita de {visita.Visitante.ObtenerNombreCompleto()} terminada";
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
@@ -137,6 +137,7 @@ namespace MarriottVisitantes.Web.Controllers
                         model.NuevaVisita.TerminarVisita();
 
                     await _servicioVisitas.AgregarVisita(model.NuevaVisita);
+                    TempData["Éxito"] = $"Visita agregada";
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -146,7 +147,7 @@ namespace MarriottVisitantes.Web.Controllers
                 
                 model.Visitante = visitante;
                 model.Usuario = usuario;
-
+                
                 return View(model);
             }
             catch(Exception ex)

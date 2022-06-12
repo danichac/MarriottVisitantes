@@ -12,7 +12,7 @@
 @if(Model.VisitantesPaginacion.Visitantes.Count > 0)
 {
     <div id="visitantes-container">
-        <table class="table table-bordered table-hover table-striped">
+        <table id="tabla-visitantes" class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
                     <th scope="col">#Identificación</th>
@@ -27,9 +27,9 @@
             <tbody>
                 @foreach (var visitante in Model.VisitantesPaginacion.Visitantes)
                 {
-                    <tr>
+                    <tr class="fila-tabla">
                         <th scope="row">
-                            <a class="nav-link" 
+                            <a class="nav-link link-seleccion" 
                                 asp-controller="Visitantes" 
                                 asp-action="Visitante"
                                 asp-route-cedula="@visitante.Cedula">@visitante.Cedula</a>
@@ -40,7 +40,7 @@
                         <td>@visitante.SegundoApellido</td>
                         <td>@visitante.NombreEmpresa</td>
                         <td>
-                            <a class="btn btn-raised-success btn-sm"
+                            <a class="btn btn-raised-success btn-sm btn-visita"
                                 asp-controller="Visitas"
                                 asp-action="Agregar"
                                 asp-route-visitanteId="@visitante.Id">Visita</a>
@@ -81,7 +81,7 @@ else
 {
     <div class="container">
         <h2 id="NoResultados" class="mb-4">La búsqueda no obtuvo resultados.</h2>
-        <a asp-controller="Visitantes" 
+        <a id="nuevo-visitante" asp-controller="Visitantes" 
             asp-action="Visitante" 
             class="btn btn-success" type="button">Nuevo visitante</a>
         <a asp-controller="Visitas" 

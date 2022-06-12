@@ -1,16 +1,23 @@
 using MarriottVisitantes.PruebasIntegracion.Datos;
+using MarriottVisitantes.PruebasIntegracion.Orden;
 using Xunit;
-using Xunit.Extensions.Ordering;
 
 namespace MarriottVisitantes.PruebasIntegracion.Tests
 {
-    public class LoginTests: MainTest
+    [TestCaseOrderer("MarriottVisitantes.PruebasIntegracion.Orden.PriorityOrderer", "MarriottVisitantes.PruebasIntegracion")]
+    public class LoginTests: IClassFixture<MainTest>
     {
+        MainTest testFixture;
+
+        public LoginTests(MainTest mainTest)
+        {
+            testFixture = mainTest;
+        }
         
-        [Fact, Order(1)]
+        [Fact, TestPriority(1)]
         public void Login_Informacion_Incorrecta_Mensaje_error()
         {
-            var paginaLogin = IrLogin();
+            var paginaLogin = testFixture.IrLogin();
             paginaLogin.IngresarEmail(FuenteDatos.EmailIncorrecto);
             paginaLogin.IngresarPassword(FuenteDatos.PasswordCorrecto);
             paginaLogin.ClickIngresar();
@@ -19,34 +26,28 @@ namespace MarriottVisitantes.PruebasIntegracion.Tests
 
             Assert.NotEmpty(datosError);
             Assert.Equal("Correo electrónico o contraseña incorrecta", datosError);
-            Terminar();
         }
 
-        [Fact, Order(2)]
+        [Fact, TestPriority(2)]
         public void Login_Informacion_Correcta_Ingreso_Exitoso()
         {
-            var paginaLogin = IrLogin();
-            Login(paginaLogin);
+            var paginaLogin = testFixture.IrLogin();
+            testFixture.Login(paginaLogin);
 
             var datosExito = paginaLogin.ObtenerDatosExito();
 
             Assert.NotEmpty(datosExito);
             Assert.Equal("Visitantes del día", datosExito);
-            
-            Terminar();
         }
 
-        [Fact, Order(3)]
+        [Fact, TestPriority(3)]
         public void Salir_Con_exito()
         {
-            var paginaLogin = IrLogin();
-            var paginaInicio = Login(paginaLogin);
-            paginaLogin = paginaInicio.Salir();
+            var paginaInicio = testFixture.IrInicio();
+            var paginaLogin = paginaInicio.Salir();
             var headerInicio = paginaLogin.ObtenerHeaderInicio();
 
             Assert.Equal("Inicio de sesión", headerInicio);
-
-            Terminar();
         }
     }
 }

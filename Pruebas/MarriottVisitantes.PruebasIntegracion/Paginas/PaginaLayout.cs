@@ -7,7 +7,7 @@ using SeleniumExtras.WaitHelpers;
 
 namespace MarriottVisitantes.PruebasIntegracion.Paginas
 {
-    public class PaginaLayout
+    public abstract class PaginaLayout
     {
         protected IWebDriver _driver;
         protected WebDriverWait _wait;
@@ -19,6 +19,8 @@ namespace MarriottVisitantes.PruebasIntegracion.Paginas
             PageFactory.InitElements(_driver, this);
         }
 
+        [FindsBy(How = How.Id, Using = LocatorStrings.MenuLocator)]
+        private IWebElement Menu;
         [FindsBy(How = How.Id, Using = LocatorStrings.BotonPerfilLocator)]
         private IWebElement BotonPerfil;
         [FindsBy(How = How.Id, Using = LocatorStrings.LinkSalirLocator)]
