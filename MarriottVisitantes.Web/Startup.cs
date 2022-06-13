@@ -38,7 +38,7 @@ namespace MarriottVisitantes.Web
         {
             services.AddControllersWithViews();
             services.AddDbContext<MarriottVisitantesDbContext>(options => {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
             });
             services.AddIdentity<Usuario, Rol>(options => 
             {
