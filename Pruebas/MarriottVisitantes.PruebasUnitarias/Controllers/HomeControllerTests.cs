@@ -41,8 +41,11 @@ namespace MarriottVisitantes.Web.Controllers
                 resultadoVista.ViewData.Model
             );
 
-            Assert.Equal(5, modelo.VisitasTerminadas.Visitas.Count);
-            Assert.Equal(0, modelo.VisitasNoTerminadas.Visitas.Count);
+            var cantidadVisitasTerminadas = modelo.VisitasTerminadas.Visitas.Count;
+            var cantidadVisitasNoTerminadas = modelo.VisitasNoTerminadas.Visitas.Count;
+
+            Assert.Equal(5, cantidadVisitasTerminadas);
+            Assert.Equal(0, cantidadVisitasNoTerminadas);
         }
     }
 }
