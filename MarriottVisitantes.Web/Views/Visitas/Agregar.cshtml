@@ -4,7 +4,7 @@
     ViewData["Title"] = "Marriott Costa Rica";
     var mensajeExito = ViewData["Éxito"] as string;
     var coloresGafete = Enum.GetValues(typeof(GafeteId))
-        .Cast<GafeteId>().Select(g => new ColorGafete()
+        .Cast<GafeteId>().Skip(1).Select(g => new ColorGafete()
             {
                 Id = g,
                 Color = g.ObtenerDescripcion()
