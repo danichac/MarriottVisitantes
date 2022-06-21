@@ -44,7 +44,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
             }
             using(IDbContextTransaction transaction = context.Database.BeginTransaction())
             {
-                await context.Users.AddAsync(usuario, cancellationToken);
+                //await context.Users.AddAsync(usuario, cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync();
                 return IdentityResult.Success;
@@ -89,7 +89,7 @@ namespace MarriottVisitantes.Repositorio.Identidad
 
         public async Task<string> GetEmailAsync(Usuario user, CancellationToken cancellationToken)
         {
-            return await context.Users.Where(u => u.Id == user.Id).Select(u => u.Email).FirstAsync();
+            return await Task.FromResult(user.Email);
         }
 
         public Task<bool> GetEmailConfirmedAsync(Usuario user, CancellationToken cancellationToken)
@@ -97,9 +97,9 @@ namespace MarriottVisitantes.Repositorio.Identidad
             throw new NotImplementedException();
         }
 
-        public Task<string> GetNormalizedEmailAsync(Usuario user, CancellationToken cancellationToken)
+        public async Task<string> GetNormalizedEmailAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(user.Email.ToUpper());
         }
 
         public async Task<string> GetNormalizedUserNameAsync(Usuario usuario, CancellationToken cancellationToken)

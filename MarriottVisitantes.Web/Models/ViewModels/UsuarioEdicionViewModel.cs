@@ -50,11 +50,17 @@ namespace MarriottVisitantes.Web.Models.ViewModels
         [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
         [Display(Name = "Nueva contraseña")]
+        [MinLength(8, ErrorMessage = "La contraseña debe ser de al menos 8 caracteres")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", 
+            ErrorMessage = "La contraseña debe contener al menos una mayúscula, número y caracter especial")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "La contraseña no coincide")]
+        [MinLength(8, ErrorMessage = "La contraseña debe ser de al menos 8 caracteres")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", 
+            ErrorMessage = "La contraseña debe contener al menos una mayúscula, número y caracter especial")]
         public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
     }

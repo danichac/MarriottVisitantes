@@ -54,7 +54,8 @@ namespace MarriottVisitantes.Web.Controllers
                         {
                             var usuarioCreado = await _servicioUsuario.BuscarPorEmailAsync(model.Email);
                             await _servicioUsuario.AgregarARol(usuarioCreado, model.Rol);
-                            
+                            TempData["Éxito"] = $"Usuario {usuarioCreado.GetNombreApellido()} creado";
+
                             return RedirectToAction("Index", "Home");
                         }
                         else
