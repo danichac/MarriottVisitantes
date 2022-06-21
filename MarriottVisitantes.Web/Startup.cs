@@ -45,6 +45,7 @@ namespace MarriottVisitantes.Web
                 options.Password.RequiredLength = 8;
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
             })
                 .AddUserStore<ApplicationUserStore>()
                 .AddEntityFrameworkStores<MarriottVisitantesDbContext>()
